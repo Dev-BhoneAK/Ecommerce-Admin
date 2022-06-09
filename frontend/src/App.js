@@ -1,5 +1,9 @@
+import Header from "./consumer/components/common/Header/Header";
+
 function App() {
-  return <div>My shop</div>;
+  return  <>
+            <Header />
+          </>;
 }
 
 export default App;
