@@ -9,12 +9,12 @@ const Search = () => {
             event.type === 'focus' ? setSearch(true) : setSearch(false);
         };
 
-        const formSearch = document.querySelector('.nav-search');
-        formSearch.addEventListener("blur", handler);
-        formSearch.addEventListener("focus", handler);
+        const navSearch = document.querySelector('.nav-search');
+        navSearch.addEventListener("blur", handler);
+        navSearch.addEventListener("focus", handler);
         return () => {
-            formSearch.removeEventListener("blur", handler);
-            formSearch.removeEventListener("focus", handler);
+            navSearch.removeEventListener("blur", handler);
+            navSearch.removeEventListener("focus", handler);
         };
     }, [search]);
     return (

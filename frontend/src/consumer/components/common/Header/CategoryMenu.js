@@ -9,10 +9,10 @@ const CategoryMenu = () => {
             setOpenMenu(false);
         };
 
-        const sideNav = document.querySelector('.category-menu');
-        sideNav.addEventListener("blur", handler);
+        const categoryMenu = document.querySelector('.category-menu');
+        categoryMenu.addEventListener("blur", handler);
         return () => {
-            sideNav.removeEventListener("blur", handler);
+            categoryMenu.removeEventListener("blur", handler);
         };
     }, [openMenu]);
 

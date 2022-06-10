@@ -1,8 +1,8 @@
-import Header from "./consumer/components/common/Header/Header";
+import Home from "./consumer/screens/Home";
 
 function App() {
   return  <>
-            <Header />
+            <Home />
           </>;
 }
 
