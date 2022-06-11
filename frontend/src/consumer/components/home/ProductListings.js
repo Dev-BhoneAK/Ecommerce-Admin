@@ -42,7 +42,7 @@ const settings = {
         },
     ],
 };
-const NewArrival = () => {
+const ProductListings = ({title}) => {
 
     return (
         <section className="bag-product ratio_square">
@@ -50,7 +50,7 @@ const NewArrival = () => {
                 <div className="row">
                     <div className="col-12">
                         <div className="title-basic">
-                            <h2 className="title font-fraunces"><i className="ti-bolt" />New Arrival</h2>
+                            <h2 className="title font-fraunces"><i className="ti-bolt" />{title}</h2>
                         </div>
                     </div>
                     <div className="col-12">
@@ -275,4 +275,4 @@ const NewArrival = () => {
         </section>
     )
 }
-export default NewArrival;
+export default ProductListings;
