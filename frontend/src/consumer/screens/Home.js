@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import Header from "../components/common/Header/Header";
 import MainSlider from "../components/home/MainSlider";
 import Banner from "../components/home/Banner";
-import NewArrival from "../components/home/NewArrival";
-import Test from "../components/home/Test";
-import Popular from "../components/home/Popular";
+import ProductListings from "../components/home/ProductListings";
+import PromotionItems from "../components/home/PromotionItems";
+import TopCollection from "../components/home/TopCollection";
+import Blogs from "../components/home/Blogs";
+import Brands from "../components/home/Brands";
+import Footer from "../components/common/Footer/Footer";
 const App = () => {
 
     const [state, setState] = useState('');
@@ -14,8 +17,13 @@ const App = () => {
             <Header />
             <MainSlider />
             <Banner />
-            {/*<Test />*/}
-            <NewArrival />
+            <ProductListings title={"Big Savings"}/>
+            <ProductListings title={"New Arrivals"}/>
+            <TopCollection />
+            <ProductListings title={"Trending Offers"}/>
+            <Blogs />
+            <Brands />
+            <Footer />
         </>
     )
 }
