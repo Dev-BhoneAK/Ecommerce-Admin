@@ -3,7 +3,6 @@ import Header from "../components/common/Header/Header";
 import MainSlider from "../components/home/MainSlider";
 import Banner from "../components/home/Banner";
 import ProductListings from "../components/home/ProductListings";
-import PromotionItems from "../components/home/PromotionItems";
 import TopCollection from "../components/home/TopCollection";
 import Blogs from "../components/home/Blogs";
 import Brands from "../components/home/Brands";

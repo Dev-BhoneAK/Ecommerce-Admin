@@ -87,6 +87,14 @@
 .footer-text {
     text-align: center;
 }
+
+.star-color {
+    color: #f39910 !important;
+}
+
+.unstar-color {
+    color: #ddd !important;
+}
 /*.height-apply {*/
 /*    height : 520px;*/
 /*    border: 3px solid #f39910;*/
