@@ -95,6 +95,40 @@
 .unstar-color {
     color: #ddd !important;
 }
+
+
+.slider-right-nav.gap-low .slick-slide > div {
+    margin: 10px 10px 0 10px;
+}
+.slider-right-nav .slick-slide > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 15px 15px 0 15px;
+    border: 1px solid #ddd;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+.slider-right-nav .slick-slide.slick-current > div {
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    opacity: 1;
+}
+.slider-right-nav .slick-slide.slick-active {
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    opacity: 1;
+}
+.slider-right-nav.border-nav .slick-slide > div {
+    padding: 4px;
+}
+.slider-right-nav .slick-slide:first-child > div {
+    margin-top: 0;
+}
+.slider-right-nav .slick-slide:first-child > div {
+    margin-top: 15px;
+}
 /*.height-apply {*/
 /*    height : 520px;*/
 /*    border: 3px solid #f39910;*/

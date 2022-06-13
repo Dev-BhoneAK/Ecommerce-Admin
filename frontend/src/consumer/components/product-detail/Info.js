@@ -5,7 +5,26 @@ const Info = () => {
 
     const [sliderNav, setSliderNav] = useState();
     const [productNav, setProductNav] = useState();
+    const leftSlick = {
+        vertical: true,
+        verticalSwiping: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: productNav,
+        arrows: false,
+        infinite: true,
+        dots: false,
+        centerMode: false,
+        focusOnSelect: true,
+    }
 
+    const rightSlick = {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: sliderNav,
+    }
     return (
         <section>
             <div className="collection-wrapper">
@@ -16,20 +35,17 @@ const Info = () => {
                                 <div className="col-12 p-0">
                                     <div className="slider-right-nav">
                                         <Slider
-                                            asNavFor={productNav}
+                                            {...leftSlick}
                                             ref={(slider2) => setSliderNav(slider2)}
-                                            slidesToShow={3}
-                                            swipeToSlide={true}
-                                            focusOnSelect={true}
                                         >
-                                        <div><img src="/assets/images/products/detail/1.jpg" alt=""
-                                                  className="img-fluid blur-up lazyload"/></div>
-                                        <div><img src="/assets/images/products/detail/2.jpg" alt=""
-                                                  className="img-fluid blur-up lazyload"/></div>
-                                        <div><img src="/assets/images/products/detail/3.jpg" alt=""
-                                                  className="img-fluid blur-up lazyload"/></div>
-                                        <div><img src="/assets/images/products/detail/4.jpg" alt=""
-                                                  className="img-fluid blur-up lazyload"/></div>
+                                        <div><img src="/assets/images/products/detail/1.jpeg" alt=""
+                                                  className="img-fluid lazyload"/></div>
+                                        <div><img src="/assets/images/products/detail/2.jpeg" alt=""
+                                                  className="img-fluid lazyload"/></div>
+                                        <div><img src="/assets/images/products/detail/3.jpeg" alt=""
+                                                  className="img-fluid lazyload"/></div>
+                                        <div><img src="/assets/images/products/detail/4.jpeg" alt=""
+                                                  className="img-fluid lazyload"/></div>
                                         </Slider>
                                     </div>
                                 </div>
@@ -37,15 +53,15 @@ const Info = () => {
                         </div>
                         <div className="col-lg-3 col-sm-10 col-xs-12 order-up">
                             <div className="product-right-slick">
-                                <Slider asNavFor={sliderNav} ref={(slider1) => setProductNav(slider1)}>
-                                    <div><img src="/assets/images/products/detail/1.jpg" alt=""
-                                              className="img-fluid blur-up lazyload image_zoom_cls-0"/></div>
-                                    <div><img src="/assets/images/products/detail/2.jpg" alt=""
-                                              className="img-fluid blur-up lazyload image_zoom_cls-1"/></div>
-                                    <div><img src="/assets/images/products/detail/3.jpg" alt=""
-                                              className="img-fluid blur-up lazyload image_zoom_cls-2"/></div>
-                                    <div><img src="/assets/images/products/detail/4.jpg" alt=""
-                                              className="img-fluid blur-up lazyload image_zoom_cls-3"/></div>
+                                <Slider {...rightSlick} ref={(slider1) => setProductNav(slider1)}>
+                                    <div><img src="/assets/images/products/detail/1.jpeg" alt=""
+                                              className="img-fluid lazyload image_zoom_cls-0"/></div>
+                                    <div><img src="/assets/images/products/detail/2.jpeg" alt=""
+                                              className="img-fluid lazyload image_zoom_cls-1"/></div>
+                                    <div><img src="/assets/images/products/detail/3.jpeg" alt=""
+                                              className="img-fluid lazyload image_zoom_cls-2"/></div>
+                                    <div><img src="/assets/images/products/detail/4.jpeg" alt=""
+                                              className="img-fluid lazyload image_zoom_cls-3"/></div>
                                 </Slider>
                             </div>
                         </div>
