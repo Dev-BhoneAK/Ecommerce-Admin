@@ -18619,45 +18619,6 @@ header.stickycls {
 .rtl-product-right-slick:hover .slick-prev {
   left: 20px;
 }
-.slider-right-nav.gap-low .slick-slide > div {
-  margin: 10px 10px 0 10px;
-}
-.slider-nav .slick-slide > div,
-.rtl-slider-nav .slick-slide > div,
-.slider-right-nav .slick-slide > div,
-.rtl-slider-right-nav .slick-slide > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 15px 15px 0 15px;
-  border: 1px solid #ddd;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  opacity: 0.4;
-}
-.slider-nav .slick-slide.slick-current > div,
-.rtl-slider-nav .slick-slide.slick-current > div,
-.slider-right-nav .slick-slide.slick-current > div,
-.rtl-slider-right-nav .slick-slide.slick-current > div {
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  opacity: 1;
-}
-.slider-nav .slick-slide.slick-active,
-.rtl-slider-nav .slick-slide.slick-active,
-.slider-right-nav .slick-slide.slick-active,
-.rtl-slider-right-nav .slick-slide.slick-active {
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  opacity: 1;
-}
-.slider-right-nav.border-nav .slick-slide > div {
-  padding: 4px;
-}
-.slider-right-nav .slick-slide:first-child > div,
-.rtl-slider-right-nav .slick-slide:first-child > div {
-  margin-top: 0;
-}
 .pro_sticky_info {
   border: 1px solid #ddd;
   padding: 20px;
@@ -31356,9 +31317,6 @@ body.dark {
     padding: 5px !important;
     margin: 0 1px;
     font-size: 12px !important;
-  }
-  .slider-right-nav .slick-slide:first-child > div {
-    margin-top: 15px;
   }
   .lookbook .lookbook-block .lookbook-dot .dot-showbox {
     width: 90px;
