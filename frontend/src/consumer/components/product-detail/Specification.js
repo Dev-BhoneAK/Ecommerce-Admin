@@ -1,38 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
+import classNames from 'classnames';
 
 const Specification = () => {
 
+    const [activeTab, setAcitveTab] = useState("detail");
+
+    // const className = classNames({
+    //     'list-group-item': true,
+    //     'strike-through': todo.completed,
+    //     'alert alert-info': todo.priority === 1,
+    //     'alert alert-warning': todo.priority === 2,
+    //     'alert alert-danger': todo.priority === 3,
+    // });
     return (
         <section className="tab-product m-0">
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-lg-12">
                         <ul className="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                            <li className="nav-item"><a className="nav-link active" id="top-home-tab"
-                                                        data-bs-toggle="tab"
-                                                        href="#top-home" role="tab" aria-selected="true"><i
-                                className="icofont icofont-ui-home"></i>Details</a>
+                            <li className="nav-item" onClick={() => setAcitveTab("detail")}>
+                                <a className={`nav-link ${activeTab === "detail" && "active"}`}
+                                   href="#!">
+                                   Details
+                                </a>
                                 <div className="material-border"></div>
                             </li>
-                            <li className="nav-item"><a className="nav-link" id="profile-top-tab" data-bs-toggle="tab"
-                                                        href="#top-profile" role="tab" aria-selected="false"><i
-                                className="icofont icofont-man-in-glasses"></i>Specification</a>
+                            <li className="nav-item" onClick={() => setAcitveTab("specification")}>
+                                <a className={`nav-link ${activeTab === "specification" && "active"}`}
+                                   href="#!">
+                                    Specification
+                                </a>
                                 <div className="material-border"></div>
                             </li>
-                            <li className="nav-item"><a className="nav-link" id="contact-top-tab" data-bs-toggle="tab"
-                                                        href="#top-contact" role="tab" aria-selected="false"><i
-                                className="icofont icofont-contacts"></i>Video</a>
+                            <li className="nav-item" onClick={() => setAcitveTab("video")}>
+                                <a className={`nav-link ${activeTab === "video" && "active"}`}
+                                   href="#!">
+                                    Video
+                                </a>
                                 <div className="material-border"></div>
                             </li>
-                            <li className="nav-item"><a className="nav-link" id="review-top-tab" data-bs-toggle="tab"
-                                                        href="#top-review" role="tab" aria-selected="false"><i
-                                className="icofont icofont-contacts"></i>Write Review</a>
+                            <li className="nav-item" onClick={() => setAcitveTab("review")}>
+                                <a className={`nav-link ${activeTab === "review" && "active"}`}
+                                   href="#!">
+                                    Write Review
+                                </a>
                                 <div className="material-border"></div>
                             </li>
                         </ul>
                         <div className="tab-content nav-material" id="top-tabContent">
-                            <div className="tab-pane fade show active" id="top-home" role="tabpanel"
-                                 aria-labelledby="top-home-tab">
+                            <div className={`tab-pane fade ${activeTab === "detail" && "show active"}`}>
                                 <div className="product-tab-discription">
                                     <div className="part">
                                         <p>The Model is wearing a white blouse from our stylist's collection, see the
@@ -63,8 +79,7 @@ const Specification = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="top-profile" role="tabpanel"
-                                 aria-labelledby="profile-top-tab">
+                            <div className={`tab-pane fade ${activeTab === 'specification' && 'show active'}`}>
                                 <p>The Model is wearing a white blouse from our stylist's collection, see the image for
                                     a
                                     mock-up of what the actual blouse would look like.it has text written on it in a
@@ -101,24 +116,26 @@ const Specification = () => {
                                     </table>
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="top-contact" role="tabpanel"
-                                 aria-labelledby="contact-top-tab">
-                                <div className="">
+                            <div className={`tab-pane fade ${activeTab === 'video' && 'show active'}`}>
+                                <div>
                                     <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8"
                                             allow="autoplay; encrypted-media" allowFullScreen></iframe>
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="top-review" role="tabpanel"
-                                 aria-labelledby="review-top-tab">
+                            <div className={`tab-pane fade ${activeTab === 'review' && 'show active'}`}>
                                 <form className="theme-form">
                                     <div className="form-row row">
                                         <div className="col-md-12">
                                             <div className="media">
                                                 <label>Rating</label>
                                                 <div className="media-body ms-3">
-                                                    <div className="rating three-star"><i className="fa fa-star"></i> <i
-                                                        className="fa fa-star"></i> <i className="fa fa-star"></i> <i
-                                                        className="fa fa-star"></i> <i className="fa fa-star"></i></div>
+                                                    <div className="rating three-star">
+                                                        <i className="fa fa-star" />
+                                                        <i className="fa fa-star" />
+                                                        <i className="fa fa-star" />
+                                                        <i className="fa fa-star" />
+                                                        <i className="fa fa-star" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,8 +161,8 @@ const Specification = () => {
                                                       id="exampleFormControlTextarea1" rows="6"></textarea>
                                         </div>
                                         <div className="col-md-12">
-                                            <button className="btn btn-solid" type="submit">Submit YOur
-                                                Review
+                                            <button className="btn btn-solid" type="submit">
+                                                Submit Your Review
                                             </button>
                                         </div>
                                     </div>
