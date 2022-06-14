@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from "react-router-dom";
 import CategoryMenu from "./CategoryMenu";
 
 const Bottom = () => {
@@ -19,7 +20,7 @@ const Bottom = () => {
                                             className="fa fa-angle-right ps-2"
                                             aria-hidden="true" /></div>
                                     </li>
-                                    <li><a href="#">Home</a></li>
+                                    <li><Link to="/" href="#">Home</Link></li>
                                     <li><a href="#">Brand<span className="sub-arrow"></span></a></li>
                                     <li><a href="#">Collection<span className="sub-arrow"></span></a></li>
                                     <li><a href="#">product</a></li>

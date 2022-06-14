@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const ProductCard = (props) => {
 
@@ -6,7 +7,7 @@ const ProductCard = (props) => {
         let stars = [];
         const totalStars = 5;
         for (let i = 1; i <= totalStars; i++) {
-            i <= starCount ? stars.push(<i className="fa fa-star star-color" />) : stars.push(<i className="fa fa-star unstar-color" />);
+            i <= starCount ? stars.push(<i className="fa fa-star star-color" key={i}/>) : stars.push(<i className="fa fa-star unstar-color" key={i}/>);
         }
         return stars;
     }
@@ -14,10 +15,12 @@ const ProductCard = (props) => {
         <div className="product-box product-wrap product-style-3">
             <div className="img-wrapper">
                 <div className="front">
-                    <a href="/#"><img alt="" src={props.image} className="img-fluid  lazyload bg-img" /></a>
+                    <Link to={`/product/1`} >
+                        <img alt="" src={props.image} className="img-fluid lazyload bg-img" />
+                    </Link>
                 </div>
-                <div className="cart-detail"><a href="/#" title="Add to Wishlist"><i
-                    className="ti-heart" aria-hidden="true" /></a>
+                <div className="cart-detail"><a href="/#" title="Add to Wishlist">
+                    <i className="ti-heart" aria-hidden="true" /></a>
                     <a href="#"
                        data-bs-toggle="modal"
                        data-bs-target="#quick-view"
