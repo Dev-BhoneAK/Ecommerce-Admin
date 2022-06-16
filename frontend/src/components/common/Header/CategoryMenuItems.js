@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import {menuItems} from 'consumer/utility/mockedcategories';
+import {menuItems} from 'utility/mockedcategories';
 import CategorySubMenuItems from "./CategorySubMenuItems";
 
 const CategoryMenuItems = () => {
