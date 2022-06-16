@@ -1,12 +1,14 @@
 import {Route,Routes} from 'react-router-dom';
-import Home from "./consumer/screens/Home";
-import ProductDetail from "./consumer/screens/ProductDetail";
+import Home from "./screens/Home";
+import ProductDetail from "./screens/ProductDetail";
 
 function App() {
-  return  <Routes>
+  return  (
+      <Routes>
             <Route path="/" exact index element={<Home />} />
             <Route path="product/:id" element={<ProductDetail />} />
-          </Routes>;
+      </Routes>
+  );
 }
 
 export default App;
