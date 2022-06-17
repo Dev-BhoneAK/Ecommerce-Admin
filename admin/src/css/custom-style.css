@@ -1,0 +1,11 @@
+.page-wrapper
+.page-body-wrapper
+.page-sidebar
+.sidebar-menu
+.sidebar-submenu
+> li
+> a:hover {
+    color: #fff;
+    webkit-transition: .3s;
+    transition: .3s;
+}
