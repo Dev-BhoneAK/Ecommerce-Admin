@@ -1,9 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {menuItems} from '../../utility/mockedMenus';
+const SidebarNav = ({sidebar}) => {
 
-const SidebarNav = () => {
+    const [menuOpen, setMenuOpen] = useState([]);
+    const handleOnClick = (event) => {
+        const dataInfo = event.currentTarget.getAttribute('data-info');
+        const mainMenuArray = menuItems.map(menuItem => menuItem.name);
+        if(mainMenuArray.includes(dataInfo)){
+            setMenuOpen([]);
+            setMenuOpen(prevState => [...prevState, dataInfo]);
+        }else{
+            const newArrayState = menuOpen.filter((value) => mainMenuArray.includes(value));
+            setMenuOpen(newArrayState.concat(dataInfo));
+        }
+    }
+
+    const generateMenus = (menuItem) => {
+        if (menuItem.submenu) {
+            return (
+                <li className={menuOpen.includes(menuItem.name) ? 'active' : undefined}>
+                    <a className={`sidebar-header ${menuOpen.includes(menuItem.name) && 'active'}`} href="#!" onClick={handleOnClick} data-info={menuItem.name}>
+                        <i className={`fa ${menuItem.icon}`} />
+                        <span>{menuItem.name}</span>
+                        <i className="fa fa-angle-right pull-right"></i>
+                    </a>
+
+                    <ul className={`sidebar-submenu ${menuOpen.includes(menuItem.name) && 'menu-open'}`}>
+                        {menuItem.submenu.map(submenuItem => (
+
+                                <li className={menuOpen.includes(submenuItem.name) ? 'active' : undefined}>
+                                    <a href="#!" className={menuOpen.includes(submenuItem.name) ? 'active' : undefined} onClick={handleOnClick} data-info={submenuItem.name}>
+                                        <i className="fa fa-circle" />{submenuItem.name}
+                                    </a>
+                                </li>
+                        ))}
+                    </ul>
+                </li>
+            )
+        }else {
+            return (
+                <li>
+                    <a className="sidebar-header" >
+                        <i className={`fa ${menuItem.icon}`} />
+                        <span>{menuItem.name}</span>
+                    </a>
+                </li>
+            );
+        }
+    }
 
     return (
-            <div className="page-sidebar">
+            <div className={`page-sidebar ${!sidebar && 'open'}`}>
                 <div className="main-header-left d-none d-lg-block">
                     <div className="logo-wrapper">
                         <a href="index.html">
@@ -24,207 +71,9 @@ const SidebarNav = () => {
                             </div>
                     </div>
                     <ul className="sidebar-menu">
-                        <li>
-
-                            <a className="sidebar-header" href="index.html">
-                                {/*<i data-feather="box"></i>*/}
-                                <i className="fa fa-home"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-archive"></i>
-                                <span>Products</span>
-                                <i className="fa fa-angle-right pull-right"></i>
-                            </a>
-
-                            <ul className="sidebar-submenu">
-
-                                <li>
-                                    <a href="category-digital.html">
-                                        <i className="fa fa-circle"></i>Category
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="category-digitalsub.html">
-                                        <i className="fa fa-circle"></i>Sub Category
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="product-listdigital.html">
-                                        <i className="fa fa-circle"></i>Product List
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="add-digital-product.html">
-                                        <i className="fa fa-circle"></i>Add Product
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="product-review.html">
-                                        <i className="fa fa-circle"></i>
-                                        <span>product Review</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-shopping-cart"></i>
-                                <span>Orders</span>
-                                <i className="fa fa-angle-right pull-right"></i>
-                            </a>
-
-                            <ul className="sidebar-submenu">
-                                <li>
-                                    <a href="order-list.html">
-                                        <i className="fa fa-circle"></i>
-                                        <span>Order List</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-tracking.html">
-                                        <i className="fa fa-circle"></i>
-                                        <span>Order Tracking</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-detail.html">
-                                        <i className="fa fa-circle"></i>
-                                        <span>Order Details</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-money" />
-                                <span>Sales</span>
-                                <i className="fa fa-angle-right pull-right" />
-                            </a>
-                            <ul className="sidebar-submenu">
-                                <li>
-                                    <a href="order.html">
-                                        <i className="fa fa-circle" />Orders
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="transactions.html">
-                                        <i className="fa fa-circle" />Transactions
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-picture-o"></i>
-                                <span>Banners</span>
-                                <i className="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul className="sidebar-submenu">
-                                <li>
-                                    <a href="coupon-list.html">
-                                        <i className="fa fa-circle"></i>Banner List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="coupon-create.html">
-                                        <i className="fa fa-circle"></i>Create Banner
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-clipboard" />
-                                <span>Pages</span>
-                                <i className="fa fa-angle-right pull-right" />
-                            </a>
-                            <ul className="sidebar-submenu">
-                                <li>
-                                    <a href="pages-list.html">
-                                        <i className="fa fa-circle" />List Page
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="page-create.html">
-                                        <i className="fa fa-circle" />Create Page
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-bars" aria-hidden="true" />
-                                <span>Menus</span>
-                                <i className="fa fa-angle-right pull-right" />
-                            </a>
-                            <ul className="sidebar-submenu">
-                                <li>
-                                    <a href="menu-list.html">
-                                        <i className="fa fa-circle" />Menu Lists
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="create-menu.html">
-                                        <i className="fa fa-circle" />Create Menu
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="#!">
-                                <i className="fa fa-user" />
-                                <span>Users</span>
-                                <i className="fa fa-angle-right pull-right" />
-                            </a>
-                            <ul className="sidebar-submenu">
-                                <li>
-                                    <a href="user-list.html">
-                                        <i className="fa fa-circle" />User List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="create-user.html">
-                                        <i className="fa fa-circle" />Create User
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="support-ticket.html">
-                                <i className="fa fa-life-ring" />
-                                <span>Support Ticket</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="reports.html">
-                                <i className="fa fa-line-chart" />
-                                <span>Reports</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a className="sidebar-header" href="invoice.html">
-                                <i className="fa fa-file-text" />
-                                <span>Invoice</span></a>
-                        </li>
+                        {
+                            menuItems.map(menuItem => generateMenus(menuItem))
+                        }
                     </ul>
                 </div>
             </div>

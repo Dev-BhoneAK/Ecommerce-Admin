@@ -8,7 +8,6 @@ const Dashboard = (props) => {
     const [sidebar, toggleSidebar] = useState(true);
 
     const handleToggleSidebar = () => {
-        console.log('hi');
         toggleSidebar(sidebar => !sidebar);
     }
 
@@ -16,7 +15,7 @@ const Dashboard = (props) => {
         <div className="page-wrapper">
             <Header sidebar={sidebar} handleToggleSidebar={handleToggleSidebar}/>
             <div className="page-body-wrapper">
-                <SidebarNav />
+                <SidebarNav sidebar={sidebar}/>
                 <div className="page-body">
                     {props.children}
                 </div>
