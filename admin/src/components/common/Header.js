@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({sidebar, handleToggleSidebar}) => {
 
     return (
-        <div className="page-main-header">
+        <div className={`page-main-header ${!sidebar && 'open'}`}>
             <div className="main-header-right row">
                 <div className="main-header-left d-lg-none w-auto">
                     <div className="logo-wrapper">
@@ -16,7 +16,7 @@ const Header = () => {
                 <div className="mobile-sidebar w-auto">
                     <div className="media-body text-end switch-sm">
                         <label className="switch">
-                            <a href="#!">
+                            <a href="#!" onClick={handleToggleSidebar}>
                                 <i id="sidebar-toggle" className="fa fa-align-left" />
                             </a>
                         </label>
@@ -25,7 +25,7 @@ const Header = () => {
                 <div className="nav-right col">
                     <ul className="nav-menus">
                         <li>
-                            <a className="text-dark" href="#!" onClick="javascript:toggleFullScreen()">
+                            <a className="text-dark" href="#!" >
                                 <i className="fa fa-arrows-alt"></i>
                             </a>
                         </li>
@@ -79,8 +79,6 @@ const Header = () => {
                         <li>
                             <a href="#!">
                                 <i className="fa fa-comment"></i>
-                                {/*<i className="fa fa-message"></i>*/}
-                                {/*<i className="right_side_toggle" data-feather="message-square" />*/}
                                 <span className="dot"></span>
                             </a>
                         </li>
