@@ -2,7 +2,8 @@ export const menuItems = [
 
     {
         name: "Home",
-        icon: "fa-home"
+        icon: "fa-home",
+        link: "/home"
     },
     {
         name: "Category",
@@ -10,9 +11,11 @@ export const menuItems = [
         submenu: [
             {
                 name: "Category List",
+                link: "/categories"
             },
             {
                 name: "Add Category",
+                link: "/add-category"
             }
         ]
     },
@@ -21,13 +24,16 @@ export const menuItems = [
         icon: "fa-archive",
         submenu: [
             {
-                name: "Product List"
+                name: "Product List",
+                link: "/products"
             },
             {
                 name: "Add Product",
+                link: "/add-product"
             },
             {
                 name: "Product Review",
+                link: "/product-review"
             }
         ]
     },
@@ -36,13 +42,16 @@ export const menuItems = [
         icon: "fa-shopping-cart",
         submenu: [
             {
-                name: "Order List"
+                name: "Order List",
+                link: "/orders"
             },
             {
                 name: "Order Tracking",
+                link: "/tracking-orders"
             },
             {
-                name: "Order Details"
+                name: "Order Details",
+                link: "/order-details"
             },
         ]
     },
@@ -72,10 +81,12 @@ export const menuItems = [
     },
     {
         name: "Reports",
-        icon: "fa-line-chart"
+        icon: "fa-line-chart",
+        link: "/reports"
     },
     {
         name: "Invoices",
-        icon: "fa-file-text"
+        icon: "fa-file-text",
+        // link: "/invoices"
     },
 ];
