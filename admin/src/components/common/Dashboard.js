@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Header from "./Header";
 import SidebarNav from "./SidebarNav";
+import Breadcrumb from "./Breadcrumb";
 import Footer from "./Footer";
 
 const Dashboard = (props) => {
@@ -17,6 +18,7 @@ const Dashboard = (props) => {
             <div className="page-body-wrapper">
                 <SidebarNav sidebar={sidebar}/>
                 <div className="page-body">
+                    <Breadcrumb />
                     {props.children}
                 </div>
             </div>
