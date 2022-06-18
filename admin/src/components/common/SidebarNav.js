@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import {menuItems} from '../../utility/mockedMenus';
 const SidebarNav = ({sidebar}) => {
 
@@ -29,9 +30,9 @@ const SidebarNav = ({sidebar}) => {
                         {menuItem.submenu.map(submenuItem => (
 
                                 <li className={menuOpen.includes(submenuItem.name) ? 'active' : undefined}>
-                                    <a href="#!" className={menuOpen.includes(submenuItem.name) ? 'active' : undefined} onClick={handleOnClick} data-info={submenuItem.name}>
+                                    <Link to={`/admin${submenuItem.link ? submenuItem.link : '#'}`} className={menuOpen.includes(submenuItem.name) ? 'active' : undefined} onClick={handleOnClick} data-info={submenuItem.name}>
                                         <i className="fa fa-circle" />{submenuItem.name}
-                                    </a>
+                                    </Link>
                                 </li>
                         ))}
                     </ul>
@@ -40,10 +41,10 @@ const SidebarNav = ({sidebar}) => {
         }else {
             return (
                 <li>
-                    <a className="sidebar-header" >
+                    <Link to={menuItem.link ? menuItem.link : '#'} className="sidebar-header" >
                         <i className={`fa ${menuItem.icon}`} />
                         <span>{menuItem.name}</span>
-                    </a>
+                    </Link>
                 </li>
             );
         }
