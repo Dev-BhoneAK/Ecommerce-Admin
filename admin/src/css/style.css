@@ -994,29 +994,6 @@
   -webkit-box-shadow: 0 0 0 0.2rem #ffd8d4;
   box-shadow: 0 0 0 0.2rem #ffd8d4;
 }
-.btn-secondary {
-  background-color: #13c9ca !important;
-  border-color: #13c9ca !important;
-}
-.btn-secondary.disabled {
-  background-color: #13c9ca !important;
-  border-color: #13c9ca !important;
-}
-.btn-secondary:disabled {
-  background-color: #13c9ca !important;
-  border-color: #13c9ca !important;
-}
-.btn-secondary:hover,
-.btn-secondary:focus,
-.btn-secondary:active,
-.btn-secondary.active {
-  background-color: #0f9b9b !important;
-  border-color: #0f9b9b !important;
-}
-.btn-secondary:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem #83f3f3;
-  box-shadow: 0 0 0 0.2rem #83f3f3;
-}
 .btn-success {
   background-color: #81ba00 !important;
   border-color: #81ba00 !important;

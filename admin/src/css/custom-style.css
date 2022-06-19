@@ -1,3 +1,4 @@
+/* Nav Sidebar Start */
 .page-wrapper
 .page-body-wrapper
 .page-sidebar
@@ -9,3 +10,74 @@
     webkit-transition: .3s;
     transition: .3s;
 }
+/* Nav Sidebar End */
+
+
+/* Datatable Customization Start */
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: #f8f9fe;
+}
+
+.react-bootstrap-table tr {
+    border-color: #f8f9fe;
+    border-style: solid;
+    border-width: 0;
+}
+
+.react-bootstrap-table-sort-order > .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.dropup .caret {
+    content: "";
+    border-top: 0;
+    border-bottom: 4px dashed;
+}
+
+.react-bootstrap-table th .order .caret {
+    color: #cccccc;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.react-bootstrap-table th .order > .dropdown > .caret {
+    margin: 10px 0 10px 5px;
+    border-top: 4px dashed;
+}
+
+.react-bootstrap-table th .order > .dropup > .caret {
+    margin: 10px 0;
+    border-bottom: 4px dashed;
+}
+
+.page-item.active .page-link {
+    background-color: #f94c3b;
+    border-color: #f94c3b;
+}
+
+.page-link {
+    color: #3d3d3c;
+}
+
+.react-bootstrap-table-pagination {
+    margin-top: 20px;
+}
+
+#pageDropDown {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+/* Datatable Customization End */
