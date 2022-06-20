@@ -1,7 +1,8 @@
 import React from 'react';
-import Dashboard from "../../components/common/Dashboard";
+import {Link} from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import Dashboard from "../../components/common/Dashboard";
 import {mockedCategories} from '../../utility/mockedCategories';
 
 const List = () => {
@@ -32,20 +33,24 @@ const List = () => {
         showTotal: true,
         disablePageTitle: true,
     };
-    
+
+    const breadCrumbArr = ['Category', 'Category List'];
+
     return (
-        <Dashboard>
+        <Dashboard breadCrumbArr={breadCrumbArr}>
             <div className="container-fluid">
                 <div className="card">
                     <div className="card-header">
                         <form className="form-inline search-form search-box">
                             <div className="form-group">
-                                <input className="form-control-plaintext" type="search" placeholder="Search.." /><span
-                                className="d-sm-none mobile-search"><i data-feather="search"></i></span>
+                                <input className="form-control-plaintext" type="search" placeholder="Search.." />
+                                <span className="d-sm-none mobile-search">
+                                    <i data-feather="search"></i>
+                                </span>
                             </div>
                         </form>
 
-                        <a href="create-vendors.html" className="btn btn-primary mt-md-0 mt-2">Create Vendort</a>
+                        <Link to={"/admin/products/add"} className="btn btn-primary mt-md-0 mt-2">Create Category</Link>
                     </div>
                     <div className="card-body vendor-table">
                         <BootstrapTable
