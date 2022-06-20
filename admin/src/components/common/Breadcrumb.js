@@ -1,14 +1,15 @@
-import React from 'react';
+    import React from 'react';
 
-const Breadcrumb = () => {
+const Breadcrumb = ({breadCrumbArr}) => {
 
+    const lastIndex = breadCrumbArr.length - 1;
     return (
         <div className="container-fluid">
             <div className="page-header">
                 <div className="row">
                     <div className="col-lg-6">
                         <div className="page-header-left">
-                            <h3>Vendor List
+                            <h3>{breadCrumbArr[lastIndex]}
                                 <small>Multikart Admin panel</small>
                             </h3>
                         </div>
@@ -17,11 +18,14 @@ const Breadcrumb = () => {
                         <ol className="breadcrumb pull-right">
                             <li className="breadcrumb-item">
                                 <a href="index.html">
-                                    <i data-feather="home"></i>
+                                    <i className="fa fa-home"></i>
                                 </a>
                             </li>
-                            <li className="breadcrumb-item">Vendors</li>
-                            <li className="breadcrumb-item active">Vendor List</li>
+                            {
+                                breadCrumbArr.map((breadCrumb, index) => (
+                                    <li key={index} className={`breadcrumb-item ${index === lastIndex && 'active'}`}>{breadCrumb}</li>
+                                ))
+                            }
                         </ol>
                     </div>
                 </div>
