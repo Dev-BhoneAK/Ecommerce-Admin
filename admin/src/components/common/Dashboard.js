@@ -18,7 +18,7 @@ const Dashboard = (props) => {
             <div className="page-body-wrapper">
                 <SidebarNav sidebar={sidebar}/>
                 <div className="page-body">
-                    <Breadcrumb />
+                    <Breadcrumb breadCrumbArr={props.breadCrumbArr}/>
                     {props.children}
                 </div>
             </div>

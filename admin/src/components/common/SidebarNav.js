@@ -19,7 +19,7 @@ const SidebarNav = ({sidebar}) => {
     const generateMenus = (menuItem) => {
         if (menuItem.submenu) {
             return (
-                <li className={menuOpen.includes(menuItem.name) ? 'active' : undefined}>
+                <li key={menuItem.name} className={menuOpen.includes(menuItem.name) ? 'active' : undefined}>
                     <a className={`sidebar-header ${menuOpen.includes(menuItem.name) && 'active'}`} href="#!" onClick={handleOnClick} data-info={menuItem.name}>
                         <i className={`fa ${menuItem.icon}`} />
                         <span>{menuItem.name}</span>
@@ -29,7 +29,7 @@ const SidebarNav = ({sidebar}) => {
                     <ul className={`sidebar-submenu ${menuOpen.includes(menuItem.name) && 'menu-open'}`}>
                         {menuItem.submenu.map(submenuItem => (
 
-                                <li className={menuOpen.includes(submenuItem.name) ? 'active' : undefined}>
+                                <li key={submenuItem.name} className={menuOpen.includes(submenuItem.name) ? 'active' : undefined}>
                                     <Link to={`/admin${submenuItem.link ? submenuItem.link : '#'}`} className={menuOpen.includes(submenuItem.name) ? 'active' : undefined} onClick={handleOnClick} data-info={submenuItem.name}>
                                         <i className="fa fa-circle" />{submenuItem.name}
                                     </Link>
@@ -40,7 +40,7 @@ const SidebarNav = ({sidebar}) => {
             )
         }else {
             return (
-                <li>
+                <li key={menuItem.name}>
                     <Link to={menuItem.link ? menuItem.link : '#'} className="sidebar-header" >
                         <i className={`fa ${menuItem.icon}`} />
                         <span>{menuItem.name}</span>
