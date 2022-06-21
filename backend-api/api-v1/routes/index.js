@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const categories = require('./categoryRoutes');
 
-router.route("/").get((req, res) => {
-    res.send(`<h2>Hello from ${req.baseUrl}</h2>`);
-});
-
+router.use('/categories', categories);
 
 module.exports = router;
