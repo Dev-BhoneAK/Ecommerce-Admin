@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Dropzone from 'react-dropzone';
 import Dashboard from "../../components/common/Dashboard";
 
 const Add = () => {
 
     const breadCrumbArr = ['Product', 'Add Product'];
+    const [heroFiles, setHeroFiles] = useState([]);
+    const fileGenerator = (acceptedFiles) => {
+        const files = acceptedFiles.map(file => Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        }));
+        return files;
+    }
 
+    // useEffect(() => {
+    //     heroFiles[0] && console.log(heroFiles[0][0].path);
+    // },[heroFiles]);
     return (
         <Dashboard breadCrumbArr={breadCrumbArr}>
             <div className="container-fluid">
@@ -84,12 +95,57 @@ const Add = () => {
                                         </div>
                                     </div>
                                     <label className="col-form-label pt-0"> Product Upload</label>
-                                    <form className="dropzone digits" id="singleFileUpload" action="/upload.php">
-                                        <div className="dz-message needsclick">
-                                            <i className="fa fa-cloud-upload" />
-                                            <h4 className="mb-0 f-w-600">Drop files here or click to upload.</h4>
-                                        </div>
-                                    </form>
+                                    <Dropzone  onDrop={(acceptedFiles) => {
+                                        setHeroFiles(prevState => [...prevState, acceptedFiles.map(file => Object.assign(file, {
+                                            preview: URL.createObjectURL(file)
+                                        }))]);
+                                        // setHeroFiles(acceptedFiles.map(file => Object.assign(file, {
+                                        //     preview: URL.createObjectURL(file)
+                                        // })));
+                                    }} name="heroImage" multiple={true}>
+                                        {({getRootProps, getInputProps}) => (
+                                            <div {...getRootProps({className: 'dropzone'})}>
+                                                <input {...getInputProps()} />
+                                                <span style={{ fontSize: ".8rem" }}>
+                                                Drop hero image here, or click to select file
+                                           </span>
+                                            </div>
+                                        )}
+                                    </Dropzone>
+                                    {/*<Dropzone  onDrop={(acceptedFiles) => {*/}
+                                    {/*        setHeroFiles(prevState => [...prevState, fileGenerator(acceptedFiles)]);*/}
+                                    {/*    }} name="heroImage" multiple={false}>*/}
+                                    {/*    {({getRootProps, getInputProps}) => (*/}
+                                    {/*        <div {...getRootProps({className: 'dropzone'})}>*/}
+                                    {/*            <input {...getInputProps()} />*/}
+                                    {/*            <span style={{ fontSize: ".8rem" }}>*/}
+                                    {/*                Drop hero image here, or click to select file*/}
+                                    {/*           </span>*/}
+                                    {/*        </div>*/}
+                                    {/*    )}*/}
+                                    {/*</Dropzone>*/}
+                                    {
+                                        heroFiles.length > 0 && heroFiles.map(hero => (
+                                            <img style={{ width: "200px", height: "200px", margin: "0", display: "block" }} src={hero[0] && hero[0].preview} alt="Hero Image"/>
+                                        ))
+                                    }
+                                    {/*<section className="container custom-dropzone">*/}
+                                    {/*    <div {...getRootProps({className: 'dropzone'})}>*/}
+                                    {/*        <input {...getInputProps()} />*/}
+                                    {/*        <i className="fa fa-cloud-upload" />*/}
+                                    {/*        <h4 className="mb-0 f-w-600">Drop files here or click to upload.</h4>*/}
+                                    {/*    </div>*/}
+                                    {/*    <aside>*/}
+                                    {/*        /!*<h4>Files</h4>*!/*/}
+                                    {/*        <ul>{files}</ul>*/}
+                                    {/*    </aside>*/}
+                                    {/*</section>*/}
+                                    {/*<form className="dropzone digits" id="singleFileUpload" action="/upload.php">*/}
+                                    {/*    <div className="dz-message needsclick">*/}
+                                    {/*        <i className="fa fa-cloud-upload" />*/}
+                                    {/*        <h4 className="mb-0 f-w-600">Drop files here or click to upload.</h4>*/}
+                                    {/*    </div>*/}
+                                    {/*</form>*/}
                                 </div>
                             </div>
                         </div>

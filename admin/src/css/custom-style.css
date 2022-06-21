@@ -81,3 +81,28 @@
     border-color: #ccc;
 }
 /* Datatable Customization End */
+
+.custom-dropzone {
+    margin-right: auto;
+    margin-left: auto;
+    padding: 140px 50px;
+    border: 2px dashed var(--theme-color);
+    border-radius: 10px;
+    -o-border-image: none;
+    border-image: none;
+    background: rgba(0,0,0,0);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 150px;
+    position: relative;
+    cursor: pointer;
+}
+
+.dropzone {
+    text-align: center;
+}
+
+.custom-dropzone i {
+    font-size: 50px;
+    color: #f94c3b;
+}
