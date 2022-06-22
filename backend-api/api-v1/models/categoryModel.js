@@ -9,7 +9,7 @@ const categorySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
+    path: {
         type: String,
         required: true
     },

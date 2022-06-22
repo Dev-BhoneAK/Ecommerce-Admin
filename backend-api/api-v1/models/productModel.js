@@ -14,8 +14,8 @@ const productSchema = mongoose.Schema({
         averageRating: { type: Number, required: true, default: 0 },
     },
     pricing: {
-        basePrice: { type: Decimal, required: true},
-        discount: Decimal,
+        basePrice: { type: mongoose.Decimal128, required: true},
+        discount: mongoose.Decimal128,
     },
     totalStockCount: {
         type: Number,
@@ -32,7 +32,7 @@ const productSchema = mongoose.Schema({
             options: [
                 {
                     title: String,
-                    price: Decimal,
+                    price: mongoose.Decimal128,
                     stockCount: Number
                 }
             ]

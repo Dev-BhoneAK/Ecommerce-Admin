@@ -19,10 +19,10 @@ const userSchema = mongoose.Schema({
         required: true
     },
     shippingAddress: {
-        address: {type: String, required: true},
-        city: {type: String, required: true},
-        state: {type: String, required: true},
-        country: {type: String, required: true},
+        address: {type: String},
+        city: {type: String},
+        state: {type: String},
+        country: {type: String},
     }
 }, {
     timestamps: true
