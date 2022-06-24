@@ -1,27 +1,26 @@
 /**
  * @module categoryService
  */
-const asyncHandler = require('express-async-handler');
 const categoryDAL = require('../DAL/categoryDAL');
 
-exports.getAllCategories = asyncHandler(async () => {
+exports.getAllCategories = async () => {
     const categories = await categoryDAL.findAllCategories();
     return categories;
-});
+};
 
-exports.getCategory = asyncHandler( async (categoryId) => {
+exports.getCategory =  async (categoryId) => {
     const categories = await categoryDAL.findCategoryById(categoryId);
     return categories;
-});
+};
 
-exports.createCategory = () => {
-    return;
+exports.createCategory = async (category) => {
+    return await categoryDAL.createCategory(category);;
 }
 
-exports.updateCategory = () => {
-    return;
+exports.updateCategory = async (categoryId, category) => {
+    return await categoryDAL.updateCategory(categoryId, category);
 }
 
-exports.deleteCategory = () => {
-    return;
+exports.deleteCategory = async (categoryId) => {
+    return await categoryDAL.deleteCategory(categoryId);
 }
