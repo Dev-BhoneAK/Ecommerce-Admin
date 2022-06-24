@@ -2,43 +2,54 @@
  * @module categoryController
  */
 const categoryService = require('../services/categoryService');
- const Category = require('../models/categoryModel');
- const mongoose = require('mongoose');
+const asyncHandler = require('express-async-handler');
 
  exports.getAllCategories =  async (req, res) => {
-    try {
-        const categories = await categoryService.getAllCategories();
-        !categories ? res.status(404).json({message: 'Category Not Found!'}) : res.status(200).json(categories);
-    }catch (err) {
-        res.status(500).json({message: err});
+     const categories = await categoryService.getAllCategories();
+     if(!categories){
+         res.status(404);
+         throw new Error('Categories Not Found');
+     }
+     res.status(200).json(categories);
+ };
+
+ exports.getCategory = asyncHandler (async (req, res) => {
+     const categoryId = req.params.categoryId;
+     const category = await categoryService.getCategory(categoryId);
+     if(!category){
+         res.status(404);
+         throw new Error('Category Not Found');
+     }
+     res.status(200).json(category);
+ });
+
+exports.createCategory = asyncHandler ( async (req, res) => {
+    const category = req.body;
+    const newCategory = await categoryService.createCategory(category);
+    if(!newCategory){
+        res.status(400);
+        throw new Error('Cannot Create New Category. Please check Input Fields');
     }
-};
+    res.status(200).json(newCategory);
+});
 
-exports.getCategory = async (req, res) => {
-    // const categoryId = mongoose.Types.ObjectId(req.params['categoryId'].trim());;
-    // const category = await Category.findById(categoryId);
-    // console.log('Category ', category);
-    try {
-        const categoryId = req.params.categoryId;
-        const category = await categoryService.getCategory(categoryId);
-
-        !category ? res.status(404).json({message: 'Category Not Found!'}) : res.status(200).json(category);
-    }catch (err) {
-        res.status(500).json({message: err});
+exports.updateCategory = asyncHandler (async (req, res) => {
+    const categoryId = req.params.categoryId;
+    const category = req.body;
+    const updatedCategory = await categoryService.updateCategory(categoryId, category);
+    if(!updatedCategory){
+        res.status(400);
+        throw new Error('Cannot Update Category. Please check Input Fields');
     }
-}
+    res.status(200).json(updatedCategory);
+});
 
-exports.createCategory = (req, res) => {
-    const createdCategory = categoryService.createCategory();
-    res.send("Create new category");
-}
-
-exports.updateCategory = (req, res) => {
-    const updatedCategory = categoryService.updateCategory();
-    res.send("Update an existing category");
-}
-
-exports.deleteCategory = (req, res) => {
-    const deletedCategory = categoryService.deleteCategory();
-    res.send("Delete an existing category");
-}
+exports.deleteCategory = asyncHandler(async (req, res) => {
+    const categoryId = req.params.categoryId;
+    const deletedCategory = await categoryService.deleteCategory(categoryId);
+    if(!deletedCategory){
+        res.status(400);
+        throw new Error('Removing category is not successful. Please Try again.');
+    }
+    res.status(200).json(deletedCategory);
+});
