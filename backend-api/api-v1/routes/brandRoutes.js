@@ -10,7 +10,7 @@ router.get("/:brandId", brandController.getBrand);
 
 router.post("/", fileUpload, brandController.createBrand);
 
-router.patch("/:brandId", brandController.updateBrand);
+router.patch("/:brandId", fileUpload, brandController.updateBrand);
 
 router.delete("/:brandId", brandController.deleteBrand);
 

@@ -26,7 +26,6 @@ exports.getBrand = asyncHandler (async (req, res) => {
 exports.createBrand = asyncHandler ( async (req, res) => {
     const brand = req.body;
     brand.logo = req.file.path;
-    // console.log('Request File ', req.file.path);
     console.log('Brand Body ', brand);
     const newBrand = await brandService.createBrand(brand);
     if(!newBrand){
@@ -39,6 +38,7 @@ exports.createBrand = asyncHandler ( async (req, res) => {
 exports.updateBrand = asyncHandler (async (req, res) => {
     const brandId = req.params.brandId;
     const brand = req.body;
+    brand.logo = req.file.path;
     const updatedBrand = await brandService.updateBrand(brandId, brand);
     if(!updatedBrand){
         res.status(400);

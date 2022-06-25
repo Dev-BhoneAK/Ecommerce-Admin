@@ -1,12 +1,12 @@
 const brandModel = require('../models/brandModel');
 const Brand = require("../models/brandModel");
 
-exports.getAllBrands = async () => {
+exports.findAllBrands = async () => {
     const brands = await brandModel.find();
     return brands;
 }
 
-exports.getBrand = async (brandId) => {
+exports.findBrandById = async (brandId) => {
     const brand = await brandModel.findById(brandId);
     return brand;
 }
@@ -17,7 +17,7 @@ exports.createBrand = (brand) => {
 }
 
 exports.updateBrand = async (brandId, brand) => {
-    return await Brand.findByIdAndUpdate(brandId, brand);
+    return  await Brand.findByIdAndUpdate(brandId, brand);
 }
 
 exports.deleteBrand = async (brandId) => {
