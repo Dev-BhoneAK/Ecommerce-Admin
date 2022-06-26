@@ -3,8 +3,8 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        const urlArr = req.originalUrl.split("/");
-        const destinationDir = "public/images/" + urlArr[3];
+        const urlArr = req.originalUrl.split("/"); //originalUrl is like /api/v1/products
+        const destinationDir = "public/images/" + urlArr[3]; // put images into different folders according to different routes
         if (!fs.existsSync(destinationDir)) {
             fs.mkdirSync(destinationDir, {
                 recursive: true
@@ -31,4 +31,5 @@ const multerOption = multer({
 });
 
 exports.fileUpload = multerOption.single('image');
+exports.multiFileUpload = multerOption.array('images', 5);
 
