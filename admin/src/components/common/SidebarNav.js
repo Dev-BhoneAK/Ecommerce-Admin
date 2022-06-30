@@ -23,7 +23,7 @@ const SidebarNav = ({sidebar}) => {
                     <a className={`sidebar-header ${menuOpen.includes(menuItem.name) && 'active'}`} href="#!" onClick={handleOnClick} data-info={menuItem.name}>
                         <i className={`fa ${menuItem.icon}`} />
                         <span>{menuItem.name}</span>
-                        <i className="fa fa-angle-right pull-right"></i>
+                        <i className="fa fa-angle-right pull-right" />
                     </a>
 
                     <ul className={`sidebar-submenu ${menuOpen.includes(menuItem.name) && 'menu-open'}`}>
@@ -41,7 +41,7 @@ const SidebarNav = ({sidebar}) => {
         }else {
             return (
                 <li key={menuItem.name}>
-                    <Link to={menuItem.link ? menuItem.link : '#'} className="sidebar-header" >
+                    <Link to={`/admin${menuItem.link ? menuItem.link : '#'}`} className="sidebar-header" >
                         <i className={`fa ${menuItem.icon}`} />
                         <span>{menuItem.name}</span>
                     </Link>
