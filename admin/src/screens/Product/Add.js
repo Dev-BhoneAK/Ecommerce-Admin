@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Dropzone from 'react-dropzone';
-import Dashboard from "../../components/common/Dashboard";
+import Breadcrumb from "../../components/common/Breadcrumb";
 
 const Add = () => {
 
@@ -19,7 +19,8 @@ const Add = () => {
     //     heroFiles[0] && console.log(heroFiles[0][0].path);
     // },[heroFiles]);
     return (
-        <Dashboard breadCrumbArr={breadCrumbArr}>
+        <div className="page-body">
+            <Breadcrumb  breadCrumbArr={breadCrumbArr} />
             <div className="container-fluid">
                 <div className="row product-adding">
                     <div className="col-xl-6">
@@ -209,7 +210,7 @@ const Add = () => {
                     </div>
                 </div>
             </div>
-        </Dashboard>
+        </div>
     )
 }
 export default Add;
