@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
-import {getAllCategories} from './categoryAPI';
+import {getAllCategories, createCategory} from './categoryAPI';
 
 const initialState = {
     categoryItems: [],
@@ -10,7 +10,15 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
 
     const response = await getAllCategories();
     return response.data;
-})
+});
+
+export const createCategory = createAsyncThunk('categories/createCategory', async category => {
+    console.log("API SaveReview");
+    const response = await createCategory(category);
+
+    console.log("Save Review JSON ",response.data);
+    return response.data;
+});
 
 const categorySlice = createSlice({
     name: 'categories',
@@ -28,6 +36,9 @@ const categorySlice = createSlice({
                 state.categoryItems = action.payload;
                 state.loadingStatus = 'idle';
             })
+            .addCase(createCategory.fulfilled, (state, action) => {
+                state.categoryItems = [...state.categoryItems,action.payload];
+        })
     }
 });
 
