@@ -1,51 +1,91 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import {CreateEditContext} from './CreateEditContext';
-import {createCategory} from './categorySlice';
+import {createCategory, updateCategory} from './categorySlice';
 
 const CreateEditForm = () => {
 
     const dispatch = useDispatch();
     const createEditContext = useContext(CreateEditContext);
-    const {categoryItems, toggleModal} = createEditContext;
-    const initialValues = {
+    const {categoryItems, toggleModal, id} = createEditContext;
+    const [initialValues, setInitialValues] = useState({
         name: '',
         parent: ''
-    };
+    });
+    const [finishFormSubmit, setFinishFormSubmit] = useState(false);
 
+    useEffect(() => {
+
+        if (id !== 0) {
+            console.log('here ', id);
+            const category = categoryItems.filter(category => category._id === id)[0];
+            // Object.keys(initialValues).map((key) => {
+            //     console.log(key);
+            //     setInitialValues(prevState => ({
+            //         ...prevState,
+            //         [key]: category[key]
+            //     }))
+            // })
+                setInitialValues(prevState => ({
+                    ...prevState,
+                    name: category['name'],
+                    parent: category['parent']
+                }))
+        }
+        // return () => {
+        //     console.log('hello');
+        //     setInitialValues({
+        //         name: '',
+        //         parent: ''
+        //     });
+        // };
+    }, [id]);
     const validationSchema = Yup.object().shape({
         name: Yup.string()
             .required('Name is required')
     });
 
-    function onSubmit(categoryFields) {
-        console.log(fields);
-        dispatch(createCategory(categoryFields));
-        // setStatus();
-        // if (isAddMode) {
-        //     createUser(fields, setSubmitting);
-        // } else {
-        //     updateUser(id, fields, setSubmitting);
-        // }
+    // function onSubmit(categoryFields) {
+    //     const returnResult = '';
+    //     console.log('Category Field: ', categoryFields);
+    //
+    //     if (id === 0) {
+    //         const returnResult = dispatch(createCategory(categoryFields));
+    //     } else {
+    //         const returnResult = dispatch(updateCategory({id, categoryFields}));
+    //     }
+    //     console.log('Return Result ', returnResult);
+    // }
+    const onSubmit = async (categoryFields) => {
+        try {
+            if (id === 0) {
+                await dispatch(createCategory(categoryFields)).unwrap();
+            }else {
+                await dispatch(updateCategory({id, categoryFields})).unwrap();
+            }
+        } catch (err) {
+            console.error('Failed to save the post: ', err)
+        } finally {
+            // setAddRequestStatus('idle')
+        }
     }
 
     return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-            {({ errors, touched, isSubmitting, setFieldValue }) => {
-
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize={true}>
+            {/*{const render = ({ errors, touched, isSubmitting, setFieldValue }) => {*/}
+            {function Render({ errors, touched, isSubmitting, setFieldValue }) {
                 // useEffect(() => {
-                //     // if (!isAddMode) {
-                //     //     // get user and set form fields
-                //     //     userService.getById(id).then(user => {
-                //     //         const fields = ['name', 'parent'];
-                //     //         fields.forEach(field => setFieldValue(field, user[field], false));
-                //     //         setUser(user);
-                //     //     });
-                //     // }
-                // }, []);
+                //     if (id !== 0) {
+                //         console.log('here ');
+                //         const category = categoryItems.filter(category => category._id === id);
+                //         console.log('category ', category);
+                //         const fields = ['name'];
+                //         setFieldValue('name', category['name'], false);
+                //         // fields.forEach(field => setFieldValue(field, category[field], false));
+                //     }
+                // }, [id, setFieldValue]);
 
                 return (
                     <Form>
