@@ -14,13 +14,17 @@ const List = () => {
     }, []);
 
     const [modal, setModal] = useState(false);
+    const [id, setId] = useState(0);
 
     const toggleModal = () => {
         setModal(modal => !modal);
+        setId(0);
     }
 
     const handleEdit = (row) => {
-        console.log(row.name);
+        console.log(row._id);
+        toggleModal();
+        setId(row._id);
     }
     const handleDelete = (row) => {
         console.log(row.name);
@@ -111,7 +115,7 @@ const List = () => {
             </div>
             {
                 modal && (
-                    <CreateEditContext.Provider value={{ modal, toggleModal, categoryItems }}>
+                    <CreateEditContext.Provider value={{ modal, toggleModal, id, categoryItems }}>
                         <CreateEditModal/>
                     </CreateEditContext.Provider>
                 )

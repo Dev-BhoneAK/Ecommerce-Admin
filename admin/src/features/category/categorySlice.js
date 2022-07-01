@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
-import {getAllCategories, createCategory} from './categoryAPI';
+import {getAllCategoriesAPI, saveCategoryAPI, updateCategoryAPI, deleteCategoryAPI} from './categoryAPI';
 
 const initialState = {
     categoryItems: [],
@@ -8,24 +8,31 @@ const initialState = {
 
 export const fetchCategories = createAsyncThunk('categories/fetchCategories', async () => {
 
-    const response = await getAllCategories();
+    const response = await getAllCategoriesAPI();
     return response.data;
 });
 
-export const createCategory = createAsyncThunk('categories/createCategory', async category => {
-    console.log("API SaveReview");
-    const response = await createCategory(category);
+// export const getCategoryById =  (state, categoryId) => state.categoryItems.filter(category => category._id === categoryId);
 
-    console.log("Save Review JSON ",response.data);
+export const createCategory = createAsyncThunk('categories/createCategory', async category => {
+    const response = await saveCategoryAPI(category);
+    return response.data;
+});
+
+export const updateCategory = createAsyncThunk('categories/updateCategory', async category => {
+    const {id, categoryFields} = category;
+    const response = await updateCategoryAPI(id, categoryFields);
+    return response.data;
+});
+
+export const deleteCategory = createAsyncThunk('categories/deleteCategory', async categoryId => {
+    const response = await deleteCategoryAPI(categoryId);
     return response.data;
 });
 
 const categorySlice = createSlice({
     name: 'categories',
     initialState,
-    reducers: {
-        // omit reducer cases
-    },
     extraReducers: builder => {
         builder
             .addCase(fetchCategories.pending, (state, action) => {
@@ -38,7 +45,15 @@ const categorySlice = createSlice({
             })
             .addCase(createCategory.fulfilled, (state, action) => {
                 state.categoryItems = [...state.categoryItems,action.payload];
-        })
+            })
+            .addCase(updateCategory.fulfilled, (state, action) => {
+                state.categoryItems = state.categoryItems.map(category =>
+                    category._id == action.payload._id ? action.payload : category
+                );
+            })
+            .addCase(deleteCategory.fulfilled, (state, action)=> {
+                state.categoryItems = state.categoryItems.filter(category => category._id != action.payload._id);
+            })
     }
 });
 
