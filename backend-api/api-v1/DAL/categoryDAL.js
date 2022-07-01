@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 const Category = require('../models/categoryModel');
 
 exports.findAllCategories = async () => {
-    const categories = await Category.find();
+    const categories = await Category.find().sort({'createdAt': 'desc'});
     return categories;
 }
 
@@ -14,9 +14,10 @@ exports.findCategoryById = async (categoryId) => {
     return category;
 }
 
-exports.createCategory = (category) => {
+exports.createCategory = async (category) => {
+    console.log('Category ', category);
     const newCategory = new Category(category);
-    return newCategory.save();
+    return await newCategory.save();
 }
 
 exports.updateCategory = async (categoryId, category) => {
