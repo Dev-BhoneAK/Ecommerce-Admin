@@ -4,7 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Dropzone from 'react-dropzone';
 import Breadcrumb from "../../components/common/Breadcrumb";
 
-const Add = () => {
+const Create = () => {
 
     const breadCrumbArr = ['Product', 'Add Product'];
     const [heroFiles, setHeroFiles] = useState([]);
@@ -213,4 +213,4 @@ const Add = () => {
         </div>
     )
 }
-export default Add;
+export default Create;
