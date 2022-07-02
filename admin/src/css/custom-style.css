@@ -95,6 +95,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     min-height: 150px;
+    text-align: center;
     position: relative;
     cursor: pointer;
 }
@@ -115,6 +116,12 @@
 }
 .show {
     display: block
+}
+
+.status-message {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: bold;
 }
 /* Bootstrap Modal End */
 

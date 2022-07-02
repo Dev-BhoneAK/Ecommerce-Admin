@@ -6,13 +6,7 @@ const CreateEditModal = () => {
 
     const createEditContext = useContext(CreateEditContext);
     const {modal, toggleModal} = createEditContext;
-    useEffect(()=> {
 
-    }, []);
-    // const modal = true;
-    // const toggleModal = () => {
-    //
-    // }
     return (
         <>
             <div className={`modal fade ${modal ? 'show' : 'hide'}`} id="exampleModal">

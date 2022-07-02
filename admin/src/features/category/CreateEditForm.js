@@ -10,16 +10,18 @@ const CreateEditForm = () => {
     const dispatch = useDispatch();
     const createEditContext = useContext(CreateEditContext);
     const {categoryItems, toggleModal, id} = createEditContext;
+    const [statusMessage, setStatusMessage] = useState({
+        status: '',
+        message: ''
+    });
     const [initialValues, setInitialValues] = useState({
         name: '',
         parent: ''
     });
-    const [finishFormSubmit, setFinishFormSubmit] = useState(false);
 
     useEffect(() => {
 
         if (id !== 0) {
-            console.log('here ', id);
             const category = categoryItems.filter(category => category._id === id)[0];
             // Object.keys(initialValues).map((key) => {
             //     console.log(key);
@@ -28,47 +30,61 @@ const CreateEditForm = () => {
             //         [key]: category[key]
             //     }))
             // })
+            // const objKeys = Object.keys(initialValues).forEach((key) => ({
+            //     [key]: category[key]
+            // }));
+            const objKeys = Object.keys(initialValues).reduce((obj, char, index) => {
+                obj[char] = category[char];
+                return obj;
+            }, {});
+            console.log('objKeys ', objKeys);
+            // setInitialValues(prevState => (Object.keys(initialValues).map((key) => ({ ...prevState, [key]: category[key] }))));
+            // setInitialValues(Object.keys(initialValues).map((key, prevState) =>
+            //     ({ ...prevState, [key]: category[key] })));
                 setInitialValues(prevState => ({
                     ...prevState,
-                    name: category['name'],
-                    parent: category['parent']
+                    ...objKeys
                 }))
         }
-        // return () => {
-        //     console.log('hello');
-        //     setInitialValues({
-        //         name: '',
-        //         parent: ''
-        //     });
-        // };
     }, [id]);
     const validationSchema = Yup.object().shape({
         name: Yup.string()
             .required('Name is required')
     });
 
-    // function onSubmit(categoryFields) {
-    //     const returnResult = '';
-    //     console.log('Category Field: ', categoryFields);
-    //
-    //     if (id === 0) {
-    //         const returnResult = dispatch(createCategory(categoryFields));
-    //     } else {
-    //         const returnResult = dispatch(updateCategory({id, categoryFields}));
-    //     }
-    //     console.log('Return Result ', returnResult);
-    // }
-    const onSubmit = async (categoryFields) => {
+    const onSubmit = async (categoryFields, {resetForm, setSubmitting}) => {
+        console.log('onSubmit ', categoryFields);
+        categoryFields.path = (categoryFields.parent === '' ? '/' : categoryFields.parent)+ '/' + categoryFields.name;
         try {
+            let message = '';
             if (id === 0) {
                 await dispatch(createCategory(categoryFields)).unwrap();
+                message = 'Category Created Successfully!';
             }else {
                 await dispatch(updateCategory({id, categoryFields})).unwrap();
+                message = 'Category Updated Successfully!';
             }
+            setStatusMessage(prevState => ({
+                ...prevState,
+                status : 'success',
+                message: message
+            }));
+            resetForm();
         } catch (err) {
-            console.error('Failed to save the post: ', err)
+            console.error('Failed to save the post: ', err);
+            setStatusMessage(prevState => ({
+                ...prevState,
+                status : 'error',
+                message: err.name +': ' + err.message
+            }));
+            setSubmitting(false);
         } finally {
-            // setAddRequestStatus('idle')
+            setTimeout(() => {
+                setStatusMessage({
+                    name: '',
+                    parent: ''
+                })
+            }, 2000);
         }
     }
 
@@ -108,22 +124,22 @@ const CreateEditForm = () => {
                                     </Field>
                                     <ErrorMessage name="parent" component="div" className="invalid-feedback" />
                                 </div>
-                                {/*<div className="form-group">*/}
-                                {/*    <button type="submit" disabled={isSubmitting} className="btn btn-primary">*/}
-                                {/*        {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}*/}
-                                {/*        Save*/}
-                                {/*    </button>*/}
-                                {/*    /!*<Link to={isAddMode ? '.' : '..'} className="btn btn-link">Cancel</Link>*!/*/}
-                                {/*</div>*/}
+                                <div className="form-group status-message">
+                                    {statusMessage?.status === 'success' ? (
+                                        <h5 className="text-success f-w-600">{statusMessage?.message}</h5>
+                                    ) : (
+                                        <h5 className="text-danger f-w-600">{statusMessage?.message}</h5>
+                                    )}
+                                </div>
                             </div>
-                            <div className="modal-footer">
-                                <button type="submit" disabled={isSubmitting} className="btn btn-primary">
-                                    {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                                    Save
-                                </button>
-                                {/*<button className="btn btn-primary" type="button">Save</button>*/}
-                                <button className="btn btn-secondary" type="button" onClick={toggleModal}>Close</button>
-                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">
+                                {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span> }
+                                {statusMessage?.status === 'success' && <i className="fa fa-check" aria-hidden="true" /> }
+                                Save
+                            </button>
+                            <button className="btn btn-secondary" type="button" onClick={toggleModal}>Close</button>
                         </div>
                     </Form>
                 );
