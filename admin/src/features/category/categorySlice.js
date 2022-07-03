@@ -26,6 +26,7 @@ export const updateCategory = createAsyncThunk('categories/updateCategory', asyn
 });
 
 export const deleteCategory = createAsyncThunk('categories/deleteCategory', async categoryId => {
+    console.log('arrive delete category');
     const response = await deleteCategoryAPI(categoryId);
     return response.data;
 });
@@ -44,7 +45,7 @@ const categorySlice = createSlice({
                 state.loadingStatus = 'idle';
             })
             .addCase(createCategory.fulfilled, (state, action) => {
-                state.categoryItems = [...state.categoryItems,action.payload];
+                state.categoryItems = [action.payload, ...state.categoryItems];
             })
             .addCase(updateCategory.fulfilled, (state, action) => {
                 state.categoryItems = state.categoryItems.map(category =>
