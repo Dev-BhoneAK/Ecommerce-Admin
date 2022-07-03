@@ -1,23 +1,32 @@
 import React, {useEffect, useState} from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 import {useDispatch, useSelector} from "react-redux";
 import Breadcrumb from "../../components/common/Breadcrumb";
-import {fetchCategories} from '../../features/category/categorySlice';
+import ConfirmDeleteAlert from "../../components/common/ConfirmDeleteAlert";
+import {fetchCategories, deleteCategory} from '../../features/category/categorySlice';
 import CreateEditModal from '../../features/category/CreateEditModal';
 import {CreateEditContext} from '../../features/category/CreateEditContext';
+import DataTable from '../../components/common/DataTable';
 
-const List = () => {
+const CategoryList = () => {
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchCategories());
     }, []);
 
+    // For CreateEdit Modal (use Modal for create, edit since there is only two form fields) and Confirm Delete Modal
+    // TODO: Use Modal from react-bootstrap and change the code
     const [modal, setModal] = useState(false);
+    const [confirmDeleteAlert, setConfirmDeleteAlert] = useState(false);
     const [id, setId] = useState(0);
 
     const toggleModal = () => {
         setModal(modal => !modal);
+        setId(0);
+    }
+
+    const toggleAlert = () => {
+        setConfirmDeleteAlert(alert => !alert);
         setId(0);
     }
 
@@ -26,9 +35,19 @@ const List = () => {
         toggleModal();
         setId(row._id);
     }
+
     const handleDelete = (row) => {
-        console.log(row.name);
+        toggleAlert();
+        setId(row._id);
     }
+
+    // For BreadCrumb Component Rendering
+    const breadCrumbArr = ['Category', 'Category List'];
+
+    // For Datatable Component Rendering
+    const category = useSelector((state) => state.category);
+    const categoryItems = category.categoryItems;
+
     const columns = [
         {
             dataField: 'name',
@@ -64,25 +83,6 @@ const List = () => {
         }
     ];
 
-    const options = {
-        alwaysShowAllBtns: true,
-        firstPageText: 'First',
-        prePageText: 'Back',
-        nextPageText: 'Next',
-        lastPageText: 'Last',
-        nextPageTitle: 'First page',
-        prePageTitle: 'Pre page',
-        firstPageTitle: 'Next page',
-        lastPageTitle: 'Last page',
-        showTotal: true,
-        disablePageTitle: true,
-    };
-
-    const breadCrumbArr = ['Category', 'Category List'];
-
-    const category = useSelector((state) => state.category);
-    const categoryItems = category.categoryItems;
-
     return (
         <div className="page-body">
             <Breadcrumb breadCrumbArr={breadCrumbArr} />
@@ -100,17 +100,7 @@ const List = () => {
 
                         <button onClick={toggleModal} className="btn btn-primary mt-md-0 mt-2">Create Category</button>
                     </div>
-                    <div className="card-body vendor-table">
-                        <BootstrapTable
-                            keyField="name"
-                            data={ categoryItems }
-                            columns={ columns }
-                            pagination={ paginationFactory(options) }
-                            striped
-                            hover
-                            bordered={ false }
-                        />
-                    </div>
+                    <DataTable data={categoryItems} columns={columns}/>
                 </div>
             </div>
             {
@@ -120,7 +110,10 @@ const List = () => {
                     </CreateEditContext.Provider>
                 )
             }
+            {
+                confirmDeleteAlert && <ConfirmDeleteAlert value={{ confirmDeleteAlert, toggleAlert, id, title: 'Category', deleteTo: deleteCategory }}/>
+            }
         </div>
     )
 }
-export default List;
+export default CategoryList;
