@@ -90,8 +90,7 @@ const CreateEditForm = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize={true}>
-            {/*{const render = ({ errors, touched, isSubmitting, setFieldValue }) => {*/}
-            {function Render({ errors, touched, isSubmitting, setFieldValue }) {
+            {({ errors, touched, isSubmitting, setFieldValue }) => {
                 // useEffect(() => {
                 //     if (id !== 0) {
                 //         console.log('here ');

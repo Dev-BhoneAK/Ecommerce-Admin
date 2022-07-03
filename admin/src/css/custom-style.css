@@ -108,6 +108,22 @@
     font-size: 50px;
     color: #f94c3b;
 }
+
+.show-images {
+    display: flex;
+    align-items:center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+
+.show-image {
+    width: 150px;
+    height: 150px;
+    display: block
+}
 /* File Dropzone End */
 
 /* Bootstrap Modal Start */
@@ -124,4 +140,6 @@
     font-weight: bold;
 }
 /* Bootstrap Modal End */
+
+
 
