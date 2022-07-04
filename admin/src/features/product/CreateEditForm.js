@@ -30,7 +30,7 @@ const CreateEditForm = () => {
 
     const [initialValues, setInitialValues] = useState({
         name: '', sku: '', category: '',
-        images: '', description: '', model: '',
+        images: [], description: '', model: '',
         brand: '', basePrice: '', totalStockCount: ''
     });
 
@@ -92,9 +92,13 @@ const CreateEditForm = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize={true}>
-            {({ errors, touched, isSubmitting, setFieldValue }) => {
+            {function Render({ errors, touched, isSubmitting, setFieldValue }) {
+
+                useEffect(() => {
+                    setFieldValue("images[]", productImages);
+                }, [productImages]);
                 return (
-                    <Form>
+                    <Form encType="multipart/form-data">
                         <div className="row product-adding">
                             <div className="col-xl-6">
                                 <div className="card">
@@ -131,9 +135,8 @@ const CreateEditForm = () => {
                                             </div>
                                             <label className="col-form-label pt-0"> Image Upload</label>
                                             <Dropzone onDrop={(acceptedFiles) => {
-                                                setProductImages(prevState => [...prevState, fileGenerator(acceptedFiles)]);
-                                                setFieldValue("images", acceptedFiles);
-                                            }} name="images" accept={{'image/*': []}} multiple={true}>
+                                                setProductImages(prevState => [...prevState, ...fileGenerator(acceptedFiles)]);
+                                            }} name="images[]" accept={{'image/*': []}} multiple={true} >
                                                 {({getRootProps, getInputProps}) => (
                                                     <div {...getRootProps({className: 'custom-dropzone'})}>
                                                         <div className="dz-message needsclick">
@@ -144,11 +147,13 @@ const CreateEditForm = () => {
                                                     </div>
                                                 )}
                                             </Dropzone>
+                                            {/*<input type='file' multiple='multiple' accept='image/*' name='images[]' id='file' onChange={(e) =>*/}
+                                                setFieldValue('images', e.currentTarget.files)}/>
                                             <ErrorMessage name="images" component="div" className="invalid-feedback" />
                                             <div className="form-group show-images">
                                                 {
                                                     productImages.length > 0 && productImages.map((image, index) => (
-                                                        <img className="show-image" src={image[0] && image[0].preview} alt="Product Image" key={index}/>
+                                                        <img className="show-image" src={image?.preview} alt="Product Image" key={index}/>
                                                     ))
                                                 }
                                             </div>

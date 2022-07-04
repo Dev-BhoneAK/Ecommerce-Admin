@@ -8,8 +8,15 @@ export const getAllProductsAPI = async () => {
 }
 
 export const saveProductAPI = async (product) => {
-    const responseData = await axios.post(API,product);
-    return responseData;
+    try{
+        const responseData = await axios.post(API,product, {
+            headers: {
+                "content-type": "multipart/form-data",
+            },});
+        return responseData;
+    }catch (e) {
+        console.log('error ', e);
+    }
 }
 
 export const updateProductAPI = async (productId, product) => {
