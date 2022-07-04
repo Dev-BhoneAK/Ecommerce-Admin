@@ -4,6 +4,7 @@ const fs = require('fs');
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         const urlArr = req.originalUrl.split("/"); //originalUrl is like /api/v1/products
+        console.log('urlArr ', urlArr);
         const destinationDir = "public/images/" + urlArr[3]; // put images into different folders according to different routes
         if (!fs.existsSync(destinationDir)) {
             fs.mkdirSync(destinationDir, {
@@ -13,7 +14,8 @@ const storage = multer.diskStorage({
         callback(null, destinationDir);
     },
     filename: function (req, file, callback) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        console.log('File is ', file);
         callback(null, file.fieldname + '-' + uniqueSuffix + '.png');
     }
 })
@@ -22,7 +24,9 @@ const multerOption = multer({
     storage: storage,
     fileFilter: function (req, file, callback) {
         const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+        console.log('arrive here');
         console.log('MIME type ',file.mimetype);
+        console.log('Field Name ',file.fieldname);
         if(!allowedExtensions.includes(file.mimetype)) {
             return callback(new Error('Please upload only image files.'), false);
         }
@@ -30,6 +34,9 @@ const multerOption = multer({
     },
 });
 
-exports.fileUpload = multerOption.single('image');
+exports.fileUpload = multerOption.single('images');
+// exports.multiFileUpload = multerOption.any('images[]');
 exports.multiFileUpload = multerOption.array('images', 5);
+// exports.multiFileUpload = multerOption.fields([{name:'images',maxCount:5}]);
+// exports.multiFileUpload = (req, file) => console.log(file.fieldname);
 
