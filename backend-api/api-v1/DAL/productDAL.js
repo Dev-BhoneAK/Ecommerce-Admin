@@ -12,7 +12,14 @@ exports.findProductById = async (productId) => {
 }
 
 exports.createProduct = (product) => {
-    const newProduct = new Product(product);
+    const {name, sku, category, images, model, brand, description, basePrice, totalStockCount} = product;
+    const productObj = {
+        info: { name, sku, category },
+        detail: { model, description },
+        pricing: { basePrice },
+        totalStockCount
+    }
+    const newProduct = new Product(productObj);
     return newProduct.save();
 }
 

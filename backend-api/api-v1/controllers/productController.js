@@ -24,16 +24,17 @@ exports.getProduct = asyncHandler (async (req, res) => {
 });
 
 exports.createProduct = asyncHandler ( async (req, res) => {
-    const product = req.file;
-    // product.logo = req.file.path;
-    console.log('Product Body ', product);
-    res.status(200).json({status: 'good one'});
-    // const newProduct = await productService.createProduct(product);
-    // if(!newProduct){
-    //     res.status(400);
-    //     throw new Error('Cannot Create New Product. Please check Input Fields');
-    // }
-    // res.status(200).json(newProduct);
+    const product = req.body;
+    const imagePathArr = [];
+    req.files.map(file => imagePathArr.push(file.path));
+    product.images = imagePathArr;
+
+    const newProduct = await productService.createProduct(product);
+    if(!newProduct){
+        res.status(400);
+        throw new Error('Cannot Create New Product. Please check Input Fields');
+    }
+    res.status(200).json(newProduct);
 });
 
 exports.updateProduct = asyncHandler (async (req, res) => {
