@@ -65,9 +65,9 @@ const ProductList = () => {
             formatter: (cellContent, row) => {
                 return (
                     <>
-                        <button>
+                        <Link to={`${row._id}`}>
                             <i className="fa fa-edit" title="Edit" />
-                        </button>
+                        </Link>
 
                         <button onClick={() => handleDelete(row)}>
                             <i className="fa fa-trash" title="Delete" />
