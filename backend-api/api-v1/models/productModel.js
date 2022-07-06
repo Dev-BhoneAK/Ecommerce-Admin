@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema({
     },
     detail: {
         model: String,
-        brand: { type: mongoose.Schema.Types.ObjectId, ref: "Brand", required: true },
+        brand: { type: mongoose.Schema.Types.ObjectId, ref: "Brand"},
         description: { type: String, required: true },
         averageRating: { type: Number, required: true, default: 0 },
     },
@@ -23,8 +23,7 @@ const productSchema = mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+        ref: "User"
     },
     optionGroups: [
         {

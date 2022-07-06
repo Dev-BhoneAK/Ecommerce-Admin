@@ -12,7 +12,7 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
     return response.data;
 });
 
-// export const getProductById =  (state, productId) => state.productItems.filter(product => product._id === productId);
+export const getProductById =  (state, productId) => state.productItems.filter(product => product._id === productId);
 
 export const createProduct = createAsyncThunk('products/createProduct', async product => {
     const response = await saveProductAPI(product);
