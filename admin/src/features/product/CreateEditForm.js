@@ -2,25 +2,61 @@ import React,{useContext, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
-import {createProduct, updateProduct} from './productSlice';
-import {fetchCategories} from "../category/categorySlice";
 import Dropzone from "react-dropzone";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import {createProduct, updateProduct} from './productSlice';
+import {fetchCategories} from "../category/categorySlice";
+import {getProductById} from "../product/productSlice";
+import {formatFormData} from '../../utility/helpers';
 
-const CreateEditForm = () => {
+const CreateEditForm = (props) => {
+
+    const [initialValues, setInitialValues] = useState({
+        name: '', sku: '', category: '',
+        images: [], description: '', model: '',
+        brand: '', basePrice: '', totalStockCount: ''
+    });
 
     const dispatch = useDispatch();
+    const productState = useSelector(state=> state.product);
     useEffect(() => {
         dispatch(fetchCategories());
-    }, []);
+        if (props.id && props.id !== 0) {
+            console.log('product state ', productState);
+            console.log('product id ', props.id);
+
+            const product = getProductById(productState, props.id);
+            // dispatch(getProductById(props.id));
+            console.log('product iis ', product);
+
+            const objKeys = Object.keys(initialValues).reduce((obj, char, index) => {
+                obj[char] = product[char];
+                return obj;
+            }, {});
+            console.log('objKeys ', objKeys);
+            // setInitialValues(prevState => (Object.keys(initialValues).map((key) => ({ ...prevState, [key]: category[key] }))));
+            // setInitialValues(Object.keys(initialValues).map((key, prevState) =>
+            //     ({ ...prevState, [key]: category[key] })));
+            // setInitialValues(prevState => ({
+            //     ...prevState,
+            //     ...objKeys
+            // }))
+        }
+    }, [productState]);
     
     const [productImages, setProductImages] = useState([]);
     const fileGenerator = (acceptedFiles) => {
         const files = acceptedFiles.map(file => Object.assign(file, {
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
+            key: productImages.length + acceptedFiles.length
         }))
         return files;
+    }
+
+    const removeImage = (key) => {
+        console.log('key ', key);
+        productImages.length > 0 && setProductImages(productImages.filter(image => image.key !== key));
     }
 
     const [statusMessage, setStatusMessage] = useState({
@@ -28,11 +64,6 @@ const CreateEditForm = () => {
         message: ''
     });
 
-    const [initialValues, setInitialValues] = useState({
-        name: '', sku: '', category: '',
-        images: [], description: '', model: '',
-        brand: '', basePrice: '', totalStockCount: ''
-    });
 
     // For Datatable Component Rendering
     const category = useSelector((state) => state.category);
@@ -57,10 +88,12 @@ const CreateEditForm = () => {
 
     const onSubmit = async (productFields, {resetForm, setSubmitting}) => {
         console.log('onSubmit ', productFields);
+        const formData = formatFormData(productFields, productImages);
+
          try {
             let message = '';
             // if (id === 0) {
-                await dispatch(createProduct(productFields)).unwrap();
+                await dispatch(createProduct(formData)).unwrap();
                 message = 'Product Created Successfully!';
             // }else {
             //     await dispatch(updateProduct({id, productFields})).unwrap();
@@ -95,7 +128,9 @@ const CreateEditForm = () => {
             {function Render({ errors, touched, isSubmitting, setFieldValue }) {
 
                 useEffect(() => {
-                    setFieldValue("images[]", productImages);
+                    {
+                        setFieldValue('images', productImages);
+                    }
                 }, [productImages]);
                 return (
                     <Form encType="multipart/form-data">
@@ -136,7 +171,7 @@ const CreateEditForm = () => {
                                             <label className="col-form-label pt-0"> Image Upload</label>
                                             <Dropzone onDrop={(acceptedFiles) => {
                                                 setProductImages(prevState => [...prevState, ...fileGenerator(acceptedFiles)]);
-                                            }} name="images[]" accept={{'image/*': []}} multiple={true} >
+                                            }} name="images" accept={{'image/*': []}} multiple={true} >
                                                 {({getRootProps, getInputProps}) => (
                                                     <div {...getRootProps({className: 'custom-dropzone'})}>
                                                         <div className="dz-message needsclick">
@@ -147,13 +182,14 @@ const CreateEditForm = () => {
                                                     </div>
                                                 )}
                                             </Dropzone>
-                                            {/*<input type='file' multiple='multiple' accept='image/*' name='images[]' id='file' onChange={(e) =>*/}
-                                                setFieldValue('images', e.currentTarget.files)}/>
                                             <ErrorMessage name="images" component="div" className="invalid-feedback" />
                                             <div className="form-group show-images">
                                                 {
                                                     productImages.length > 0 && productImages.map((image, index) => (
-                                                        <img className="show-image" src={image?.preview} alt="Product Image" key={index}/>
+                                                        <div className="image-area">
+                                                            <img className="show-image" src={image?.preview} alt="Product Image" key={index}/>
+                                                            <a className="remove-image" onClick={() => removeImage(image.key)}>&#215;</a>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>
