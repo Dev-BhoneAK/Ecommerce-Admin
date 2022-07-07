@@ -4,7 +4,7 @@ exports.productsData = [
         info: {
             name: 'Premium Oculus VR',
             sku: '12345GB6',
-            categories: ["/audio/headphones/wireless-headphones"],
+            category: "/audio/headphones/wireless-headphones",
             images: ['/assets/images/products/1.jpg']
         },
         detail: {
@@ -21,7 +21,7 @@ exports.productsData = [
         info: {
             name: 'Dr.Dre Wireless Bluetooth Headphones',
             sku: '111445GB3',
-            categories: ["/audio/headphones/wireless-headphones"],
+            category: "/audio/headphones/wireless-headphones",
             images: ['/assets/images/products/2.jpg']
         },
         detail: {
@@ -38,7 +38,7 @@ exports.productsData = [
         info: {
             name: 'iPhone 10 Pro 128GB',
             sku: '198745GB2',
-            categories: ["/phones/iphones"],
+            category: "/phones/iphones",
             images: ['/assets/images/products/3.jpg']
         },
         detail: {
@@ -56,7 +56,7 @@ exports.productsData = [
         info: {
             name: 'ViewSonic IdeaPad',
             sku: '291275GB2',
-            categories: ["/computers-tablets/laptops/gaming-laptops"],
+            category: "/computers-tablets/laptops/gaming-laptops",
             images: ['/assets/images/products/4.jpg']
         },
         detail: {
@@ -73,7 +73,7 @@ exports.productsData = [
         info: {
             name: 'Aukey Power Bank',
             sku: '676275GB2',
-            categories: ["/accessories/power-banks"],
+            category: "/accessories/power-banks",
             images: ['/assets/images/products/5.jpg']
         },
         detail: {
@@ -90,7 +90,7 @@ exports.productsData = [
         info: {
             name: 'Elegant G182 Pro',
             sku: '180475GB2',
-            categories: ["/phones/android-phones"],
+            category: "/phones/android-phones",
             images: ['/assets/images/products/6.jpg']
         },
         detail: {
