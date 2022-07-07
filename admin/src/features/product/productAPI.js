@@ -20,7 +20,10 @@ export const saveProductAPI = async (product) => {
 }
 
 export const updateProductAPI = async (productId, product) => {
-    const responseData = await axios.patch(API+`/${productId}`,product);
+    const responseData = await axios.patch(API+`/${productId}`,product, {
+        headers: {
+            "content-type": "multipart/form-data",
+        },});
     return responseData;
 }
 

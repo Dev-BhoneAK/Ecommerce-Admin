@@ -12,7 +12,7 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
     return response.data;
 });
 
-export const getProductById =  (state, productId) => state.productItems.filter(product => product._id === productId);
+export const getProductById =  (state, productId) => state.productItems.filter(product => product._id === productId)[0];
 
 export const createProduct = createAsyncThunk('products/createProduct', async product => {
     const response = await saveProductAPI(product);
@@ -20,9 +20,13 @@ export const createProduct = createAsyncThunk('products/createProduct', async pr
 });
 
 export const updateProduct = createAsyncThunk('products/updateProduct', async product => {
-    const {id, productFields} = product;
-    const response = await updateProductAPI(id, productFields);
-    return response.data;
+    try {
+        const {id, formData} = product;
+        const response = await updateProductAPI(id, formData);
+        return response.data;
+    }catch (e) {
+        console.log('error is ', e);
+    }
 });
 
 export const deleteProduct = createAsyncThunk('products/deleteProduct', async productId => {
