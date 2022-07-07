@@ -29,7 +29,7 @@ export const menuItems = [
             },
             {
                 name: "Add Product",
-                link: "/add-product"
+                link: "/products/create"
             },
             {
                 name: "Product Review",

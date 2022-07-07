@@ -5,6 +5,7 @@ import Home from './screens/Home';
 import CategoryList from './screens/Category/List';
 import ProductList from './screens/Product/List';
 import Create from "./screens/Product/Create";
+import Edit from "./screens/Product/Edit";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path="categories" element={<CategoryList />} />
               <Route path="products" element={<ProductList />} />
               <Route path="products/create" element={<Create />} />
+              <Route path="products/:id" element={<Edit />} />
           </Route>
 
       </Routes>

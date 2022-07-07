@@ -1,4 +1,4 @@
-export function formatFormData (productFields, productImages) {
+export function formatFormData (productFields, productImages, existingImages) {
     const formData = new FormData();
 
     Object.keys(productFields).map(fieldName => {
@@ -25,5 +25,11 @@ export function formatFormData (productFields, productImages) {
     productImages.length > 0 && productImages.map((image, index) => {
         formData.append('images', image);
     });
+
+    let imageArr = [];
+    existingImages.length > 0 && existingImages.map((image, index) => {
+        imageArr.push(image.preview);
+    });
+    formData.append('existingImages', imageArr);
     return formData;
 }
