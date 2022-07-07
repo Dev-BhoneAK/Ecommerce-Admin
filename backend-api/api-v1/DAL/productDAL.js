@@ -14,7 +14,7 @@ exports.findProductById = async (productId) => {
 exports.createProduct = (product) => {
     const {name, sku, category, images, model, brand, description, basePrice, totalStockCount} = product;
     const productObj = {
-        info: { name, sku, category },
+        info: { name, sku, category, images },
         detail: { model, description },
         pricing: { basePrice },
         totalStockCount
@@ -24,7 +24,14 @@ exports.createProduct = (product) => {
 }
 
 exports.updateProduct = async (productId, product) => {
-    return  await Product.findByIdAndUpdate(productId, product);
+    const {name, sku, category, images, model, brand, description, basePrice, totalStockCount} = product;
+    const productObj = {
+        info: { name, sku, category, images },
+        detail: { model, description },
+        pricing: { basePrice },
+        totalStockCount
+    }
+    return  await Product.findByIdAndUpdate(productId, productObj);
 }
 
 exports.deleteProduct = async (productId) => {

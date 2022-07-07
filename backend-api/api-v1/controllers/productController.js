@@ -3,7 +3,7 @@
  */
 const productService = require('../services/productService');
 const asyncHandler = require('express-async-handler');
-
+const util = require('util')
 exports.getAllProducts =  async (req, res) => {
     const products = await productService.getAllProducts();
     if(!products){
@@ -24,9 +24,9 @@ exports.getProduct = asyncHandler (async (req, res) => {
 });
 
 exports.createProduct = asyncHandler ( async (req, res) => {
-    const product = req.body;
     const imagePathArr = [];
     req.files.map(file => imagePathArr.push(file.path));
+    const product = req.body;
     product.images = imagePathArr;
 
     const newProduct = await productService.createProduct(product);
@@ -38,9 +38,12 @@ exports.createProduct = asyncHandler ( async (req, res) => {
 });
 
 exports.updateProduct = asyncHandler (async (req, res) => {
+    const imagePathArr = [];
+    req.files.map(file => imagePathArr.push(file.path));
     const productId = req.params.productId;
     const product = req.body;
-    product.logo = req.file.path;
+    const existingImagesArr = product.existingImages;
+    product.images = [...imagePathArr, existingImagesArr];
     const updatedProduct = await productService.updateProduct(productId, product);
     if(!updatedProduct){
         res.status(400);
