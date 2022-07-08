@@ -1,180 +1,183 @@
 /* Nav Sidebar Start */
 .page-wrapper
-.page-body-wrapper
-.page-sidebar
-.sidebar-menu
-.sidebar-submenu
-> li
-> a:hover {
-    color: #fff;
-    webkit-transition: .3s;
-    transition: .3s;
+  .page-body-wrapper
+  .page-sidebar
+  .sidebar-menu
+  .sidebar-submenu
+  > li
+  > a:hover {
+  color: #fff;
+  webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 /* Nav Sidebar End */
 
-
 /* Datatable Customization Start */
-.table-striped>tbody>tr:nth-of-type(odd) {
-    --bs-table-accent-bg: #f8f9fe;
+.table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: #f8f9fe;
 }
 
 .react-bootstrap-table tr {
-    border-color: #f8f9fe;
-    border-style: solid;
-    border-width: 0;
+  border-color: #f8f9fe;
+  border-style: solid;
+  border-width: 0;
 }
 
 .react-bootstrap-table-sort-order > .caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px dashed;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
 }
 
 .dropup .caret {
-    content: "";
-    border-top: 0;
-    border-bottom: 4px dashed;
+  content: "";
+  border-top: 0;
+  border-bottom: 4px dashed;
 }
 
 .react-bootstrap-table th .order .caret {
-    color: #cccccc;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+  color: #cccccc;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
 }
 
 .react-bootstrap-table th .order > .dropdown > .caret {
-    margin: 10px 0 10px 5px;
-    border-top: 4px dashed;
+  margin: 10px 0 10px 5px;
+  border-top: 4px dashed;
 }
 
 .react-bootstrap-table th .order > .dropup > .caret {
-    margin: 10px 0;
-    border-bottom: 4px dashed;
+  margin: 10px 0;
+  border-bottom: 4px dashed;
 }
 
 .page-item.active .page-link {
-    background-color: #f94c3b;
-    border-color: #f94c3b;
+  background-color: #f94c3b;
+  border-color: #f94c3b;
 }
 
 .page-link {
-    color: #3d3d3c;
+  color: #3d3d3c;
 }
 
 .react-bootstrap-table-pagination {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #pageDropDown {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
 }
 /* Datatable Customization End */
 
 /* File Dropzone Start */
 .custom-dropzone {
-    margin-right: auto;
-    margin-left: auto;
-    padding: 140px 50px;
-    border: 2px dashed var(--theme-color);
-    border-radius: 10px;
-    -o-border-image: none;
-    border-image: none;
-    background: rgba(0,0,0,0);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    min-height: 150px;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 140px 50px;
+  border: 2px dashed var(--theme-color);
+  border-radius: 10px;
+  -o-border-image: none;
+  border-image: none;
+  background: rgba(0, 0, 0, 0);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 150px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .dropzone {
-    text-align: center;
+  text-align: center;
 }
 
 .custom-dropzone i {
-    font-size: 50px;
-    color: #f94c3b;
+  font-size: 50px;
+  color: #f94c3b;
 }
 
 .show-images {
-    display: flex;
-    align-items:center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    column-gap: 2rem;
-    row-gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  column-gap: 2rem;
+  row-gap: 2rem;
 }
 
 .show-image {
-    width: 150px;
-    height: 150px;
-    display: block
+  width: 150px;
+  height: 150px;
+  display: block;
+  object-fit: cover;
 }
 /* File Dropzone End */
 
 /*Dropzone Show Image Start*/
 .image-area {
-    position: relative;
-    background: #333;
+  position: relative;
+  background: #333;
 }
 .remove-image {
-    display: inline;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    border-radius: 10em;
-    padding: 2px 6px 3px;
-    text-decoration: none;
-    font: 700 21px/20px sans-serif;
-    background: #E54E4E;
-    border: 3px solid #fff;
-    color: #FFF;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.3);
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    transition: 0.2s;
-    cursor: pointer;
+  display: inline;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border-radius: 10em;
+  padding: 2px 6px 3px;
+  text-decoration: none;
+  font: 700 21px/20px sans-serif;
+  background: #e54e4e;
+  border: 3px solid #fff;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: 0.2s;
+  cursor: pointer;
 }
 .remove-image:hover {
-    color: #FFF;
-    padding: 4px 8px 6px;
-    top: -15px;
-    right: -15px;
+  color: #fff;
+  padding: 4px 8px 6px;
+  top: -15px;
+  right: -15px;
 }
 .remove-image:active {
-    background: #E54E4E;
-    top: -10px;
-    right: -11px;
+  background: #e54e4e;
+  top: -10px;
+  right: -11px;
 }
 /*Dropzone Show Image End*/
 
 /* Bootstrap Modal Start */
 .hide {
-    display: none
+  display: none;
 }
 .show {
-    display: block
+  display: block;
 }
 
 .status-message {
-    margin-top: 1.5rem;
-    text-align: center;
-    font-weight: bold;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: bold;
 }
 /* Bootstrap Modal End */
 
-
-
+/* Server Form Response Message Start */
+.show-message {
+  margin-top: 1.5rem;
+}
+/* Server Form Response Message End */
