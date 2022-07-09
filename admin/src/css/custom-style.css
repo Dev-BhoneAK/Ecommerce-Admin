@@ -159,6 +159,14 @@
   top: -10px;
   right: -11px;
 }
+
+.required-image {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
 /*Dropzone Show Image End*/
 
 /* Bootstrap Modal Start */
