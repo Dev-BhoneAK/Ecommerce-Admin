@@ -18,3 +18,18 @@ export function formatFormData(productFields, productImages, existingImages) {
 
   return formData;
 }
+
+export function setInitialValuesToForm(
+  initialValues,
+  setInitialValues,
+  formObj
+) {
+  const objKeys = Object.keys(initialValues).reduce((obj, char, index) => {
+    obj[char] = formObj[char];
+    return obj;
+  }, {});
+  setInitialValues((prevState) => ({
+    ...prevState,
+    ...objKeys,
+  }));
+}
