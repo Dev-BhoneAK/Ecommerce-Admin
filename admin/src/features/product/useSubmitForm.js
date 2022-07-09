@@ -65,30 +65,6 @@ const useSubmitForm = () => {
     }, 3000);
   };
   return { submitForm, updateForm, showMessage };
-
-  // setStatusMessage((prevState) => ({
-  //   ...prevState,
-  //   status: "success",
-  //   message: message,
-  // }));
-  // setProductImages([]);
-  //   } catch (err) {
-  //     console.error("Failed to save the post: ", err);
-  //     return err;
-  // setStatusMessage((prevState) => ({
-  //   ...prevState,
-  //   status: "error",
-  //   message: err.name + ": " + err.message,
-  // }));
-  // setSubmitting(false);
-  //   } finally {
-  // setTimeout(() => {
-  //   setStatusMessage({
-  //     name: "",
-  //     parent: "",
-  //   });
-  // }, 2000);
-  //   }
 };
 
 export default useSubmitForm;

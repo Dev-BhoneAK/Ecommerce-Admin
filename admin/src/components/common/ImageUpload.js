@@ -2,8 +2,13 @@ import React from "react";
 import Dropzone from "react-dropzone";
 import { ErrorMessage } from "formik";
 
-const ImageUpload = ({ productImagesObj, existingImages }) => {
+const ImageUpload = ({
+  productImagesObj,
+  existingImages,
+  requiredImageObj,
+}) => {
   const { productImages, setProductImages } = productImagesObj;
+  const { requiredImageMessage, setRequiredImageMessage } = requiredImageObj;
   const fileGenerator = (acceptedFiles) => {
     const files = acceptedFiles.map((file) =>
       Object.assign(file, {
@@ -11,6 +16,7 @@ const ImageUpload = ({ productImagesObj, existingImages }) => {
         key: productImages.length + acceptedFiles.length,
       })
     );
+    setRequiredImageMessage(false);
     return files;
   };
 
@@ -45,6 +51,9 @@ const ImageUpload = ({ productImagesObj, existingImages }) => {
           </div>
         )}
       </Dropzone>
+      {requiredImageMessage && (
+        <div className="required-image">Product Image is required.</div>
+      )}
       <ErrorMessage
         name="images"
         component="div"
