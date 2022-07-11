@@ -16,7 +16,7 @@ const TextEditor = ({
   };
   return (
     <div className="form-group">
-      <label className="col-form-label pt-0"> {labelName}</label>
+      {/* <label className="col-form-label pt-0"> {labelName}</label> */}
       <div className="description-sm">
         <CKEditor
           editor={ClassicEditor}

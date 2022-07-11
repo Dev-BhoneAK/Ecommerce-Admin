@@ -2,18 +2,14 @@ import React from "react";
 import Dropzone from "react-dropzone";
 import { ErrorMessage } from "formik";
 
-const ImageUpload = ({
-  productImagesObj,
-  existingImages,
-  requiredImageObj,
-}) => {
-  const { productImages, setProductImages } = productImagesObj;
+const ImageUpload = ({ imagesObj, existingImages, requiredImageObj }) => {
+  const { images, setImages } = imagesObj;
   const { requiredImageMessage, setRequiredImageMessage } = requiredImageObj;
   const fileGenerator = (acceptedFiles) => {
     const files = acceptedFiles.map((file) =>
       Object.assign(file, {
         preview: URL.createObjectURL(file),
-        key: productImages.length + acceptedFiles.length,
+        key: images.length + acceptedFiles.length,
       })
     );
     setRequiredImageMessage(false);
@@ -21,16 +17,15 @@ const ImageUpload = ({
   };
 
   const removeImage = (key) => {
-    productImages.length > 0 &&
-      setProductImages(productImages.filter((image) => image.key !== key));
+    images.length > 0 && setImages(images.filter((image) => image.key !== key));
   };
 
   return (
     <>
-      <label className="col-form-label pt-0"> Image Upload</label>
+      {/* <label className="col-form-label pt-0"> Image Upload</label> */}
       <Dropzone
         onDrop={(acceptedFiles) => {
-          setProductImages((prevState) => [
+          setImages((prevState) => [
             ...prevState,
             ...fileGenerator(acceptedFiles),
           ]);
@@ -76,8 +71,8 @@ const ImageUpload = ({
               </a>
             </div>
           ))}
-        {productImages.length > 0 &&
-          productImages.map((image, index) => (
+        {images.length > 0 &&
+          images.map((image, index) => (
             <div className="image-area" key={index}>
               <img
                 className="show-image"
