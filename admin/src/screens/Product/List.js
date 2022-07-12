@@ -39,6 +39,11 @@ const ProductList = () => {
 
   const columns = [
     {
+      dataField: "_id",
+      text: "Product ID",
+      hidden: true,
+    },
+    {
       dataField: "info.images",
       text: "Product Image",
       formatter: (cellContent, row) => (
@@ -56,8 +61,15 @@ const ProductList = () => {
       sort: true,
     },
     {
-      dataField: "info.categories",
+      dataField: "info.category",
       text: "Category",
+      formatter: (cellContent, row) => {
+        const categoryPathArr = row.info.category.split("/");
+        const childCategory = categoryPathArr[categoryPathArr.length - 1];
+        return (
+          <div style={{ textTransform: "capitalize" }}>{childCategory}</div>
+        );
+      },
       sort: true,
     },
     {

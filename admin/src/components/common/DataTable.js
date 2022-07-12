@@ -24,7 +24,7 @@ const DataTable = ({ data, columns }) => {
   return (
     <div className="card-body vendor-table">
       <BootstrapTable
-        keyField="name"
+        keyField="_id"
         data={data}
         columns={columns}
         pagination={paginationFactory(options)}
