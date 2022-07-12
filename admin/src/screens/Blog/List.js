@@ -36,6 +36,11 @@ const BlogList = () => {
 
   const columns = [
     {
+      dataField: "_id",
+      text: "Blog ID",
+      hidden: true,
+    },
+    {
       dataField: "title",
       text: "Blog Title",
       sort: true,

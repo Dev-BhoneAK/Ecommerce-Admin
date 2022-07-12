@@ -48,6 +48,11 @@ const BrandList = () => {
 
   const columns = [
     {
+      dataField: "_id",
+      text: "Brand ID",
+      hidden: true,
+    },
+    {
       dataField: "name",
       text: "Brand Name",
       sort: true,
