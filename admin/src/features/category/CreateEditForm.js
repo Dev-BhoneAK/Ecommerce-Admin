@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { CreateEditContext } from "./CreateEditContext";
+import { CreateEditContext } from "../../components/common/CreateEditContext";
 import { createCategory, updateCategory } from "./categorySlice";
 
 const CreateEditForm = () => {
@@ -23,30 +23,17 @@ const CreateEditForm = () => {
       const category = categoryItems.filter(
         (category) => category._id === id
       )[0];
-      // Object.keys(initialValues).map((key) => {
-      //     console.log(key);
-      //     setInitialValues(prevState => ({
-      //         ...prevState,
-      //         [key]: category[key]
-      //     }))
-      // })
-      // const objKeys = Object.keys(initialValues).forEach((key) => ({
-      //     [key]: category[key]
-      // }));
       const objKeys = Object.keys(initialValues).reduce((obj, char, index) => {
         obj[char] = category[char];
         return obj;
       }, {});
-      console.log("objKeys ", objKeys);
-      // setInitialValues(prevState => (Object.keys(initialValues).map((key) => ({ ...prevState, [key]: category[key] }))));
-      // setInitialValues(Object.keys(initialValues).map((key, prevState) =>
-      //     ({ ...prevState, [key]: category[key] })));
       setInitialValues((prevState) => ({
         ...prevState,
         ...objKeys,
       }));
     }
   }, [id]);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
   });

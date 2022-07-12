@@ -215,6 +215,10 @@ const CreateEditForm = (props) => {
                           className="invalid-feedback"
                         />
                       </div>
+                      <label className="col-form-label pt-0">
+                        {" "}
+                        Image Upload
+                      </label>
                       <ImageUpload
                         productImagesObj={{ productImages, setProductImages }}
                         existingImages={existingImages}
