@@ -5,13 +5,9 @@ const useSubmitForm = () => {
   const dispatch = useDispatch();
 
   const submitForm = async (formDataObj, formActionObj) => {
-    const { id, productFields, productImages, existingImages } = formDataObj;
+    const { id, fields, images, existingImages } = formDataObj;
     const { create, update } = formActionObj;
-    const formData = formatFormData(
-      productFields,
-      productImages,
-      existingImages
-    );
+    const formData = formatFormData(fields, images, existingImages);
 
     let status = "";
     let message = "";

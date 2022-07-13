@@ -8,12 +8,16 @@ export const getAllBlogsAPI = async () => {
 };
 
 export const saveBlogAPI = async (blog) => {
-  const responseData = await axios.post(API, blog, {
-    headers: {
-      "content-type": "multipart/form-data",
-    },
-  });
-  return responseData;
+  try {
+    const responseData = await axios.post(API, blog, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    return responseData;
+  } catch (err) {
+    console.log("err ", err);
+  }
 };
 
 export const updateBlogAPI = async (blogId, blog) => {
