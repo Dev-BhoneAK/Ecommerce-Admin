@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {fileUpload} = require('../middleware/fileUploadMiddleware');
+const { multiFileUpload } = require("../middleware/fileUploadMiddleware");
 
-const blogController = require('../controllers/blogController');
+const blogController = require("../controllers/blogController");
 
 router.get("/", blogController.getAllBlogs);
 
 router.get("/:blogId", blogController.getBlog);
 
-router.post("/", fileUpload, blogController.createBlog);
+router.post("/", multiFileUpload, blogController.createBlog);
 
-router.patch("/:blogId", fileUpload, blogController.updateBlog);
+router.patch("/:blogId", multiFileUpload, blogController.updateBlog);
 
 router.delete("/:blogId", blogController.deleteBlog);
 
