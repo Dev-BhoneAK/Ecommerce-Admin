@@ -25,7 +25,7 @@ const CreateEditForm = (props) => {
     basePrice: "",
     totalStockCount: "",
   });
-  const [productImages, setProductImages] = useState([]); // For new image upload, use productImages state
+  const [images, setImages] = useState([]); // For new image upload, use images state
   const [existingImages, setexistingImages] = useState([]); // For created product's image, use existingImages state
   // For server response message, use statusMessage state
   const [statusMessage, setStatusMessage] = useState({
@@ -35,6 +35,7 @@ const CreateEditForm = (props) => {
   const [description, setDescription] = useState({
     status: true,
     count: 0,
+    message: "",
   });
 
   const [requiredImageMessage, setRequiredImageMessage] = useState(false);
@@ -91,23 +92,24 @@ const CreateEditForm = (props) => {
   });
 
   /* Call on Form Submit */
-  const onSubmit = async (productFields, { resetForm, setSubmitting }) => {
+  const onSubmit = async (fields, { resetForm, setSubmitting }) => {
     console.log("description ", description.count);
-    if (productImages.length === 0 && existingImages.length === 0) {
+    if (images.length === 0 && existingImages.length === 0) {
       setRequiredImageMessage(true);
     } else if (description.count < 10) {
       setDescription((prevState) => ({
         ...prevState,
         status: false,
+        message: "Product Description is required.",
       }));
     } else {
       const id = props.id ? props.id : 0;
-      const formDataObj = { id, productFields, productImages, existingImages };
+      const formDataObj = { id, fields, images, existingImages };
       const formActionObj = { create: createProduct, update: updateProduct };
       const { status, message } = await submitForm(formDataObj, formActionObj);
       if (status === "success") {
         updateForm(id, { resetForm, initialValues, setInitialValues });
-        setProductImages([]);
+        setImages([]);
         setexistingImages([]);
         showMessage({
           setStatusMessage,
@@ -131,9 +133,9 @@ const CreateEditForm = (props) => {
       {function Render({ errors, touched, setFieldValue, isSubmitting }) {
         useEffect(() => {
           {
-            setFieldValue("images", productImages);
+            setFieldValue("images", images);
           }
-        }, [productImages]);
+        }, [images]);
         return (
           <Form encType="multipart/form-data">
             <div className="row product-adding">
@@ -149,8 +151,7 @@ const CreateEditForm = (props) => {
                           htmlFor="validationCustom01"
                           className="col-form-label pt-0"
                         >
-                          <span>*</span>
-                          Name
+                          <span>*</span> Name
                         </label>
                         <Field
                           name="name"
@@ -189,8 +190,7 @@ const CreateEditForm = (props) => {
                       </div>
                       <div className="form-group">
                         <label className="col-form-label categories-basic">
-                          <span>*</span>
-                          Category
+                          <span>*</span> Category
                         </label>
                         <Field
                           name="category"
@@ -215,18 +215,19 @@ const CreateEditForm = (props) => {
                           className="invalid-feedback"
                         />
                       </div>
-                      <label className="col-form-label pt-0">
-                        {" "}
-                        Image Upload
-                      </label>
-                      <ImageUpload
-                        productImagesObj={{ productImages, setProductImages }}
-                        existingImages={existingImages}
-                        requiredImageObj={{
-                          requiredImageMessage,
-                          setRequiredImageMessage,
-                        }}
-                      />
+                      <div className="form-group">
+                        <label className="col-form-label categories-basic">
+                          <span>*</span> Image Upload
+                        </label>
+                        <ImageUpload
+                          imagesObj={{ images, setImages }}
+                          existingImages={existingImages}
+                          requiredImageObj={{
+                            requiredImageMessage,
+                            setRequiredImageMessage,
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -238,15 +239,20 @@ const CreateEditForm = (props) => {
                   </div>
                   <div className="card-body">
                     <div className="digital-add needs-validation">
-                      <TextEditor
-                        labelName="Description"
-                        initialValues={initialValues}
-                        setFieldValue={setFieldValue}
-                        descriptionObj={{
-                          description,
-                          setDescription,
-                        }}
-                      />
+                      <div className="form-group">
+                        <label className="col-form-label categories-basic">
+                          <span>*</span> Description
+                        </label>
+                        <TextEditor
+                          labelName="Description"
+                          initialValues={initialValues}
+                          setFieldValue={setFieldValue}
+                          descriptionObj={{
+                            description,
+                            setDescription,
+                          }}
+                        />
+                      </div>
                       <div className="form-group">
                         <label
                           htmlFor="validationCustomtitle"

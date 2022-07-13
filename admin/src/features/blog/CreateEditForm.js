@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { object, string } from "yup";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { getBlogById } from "../blog/blogSlice";
 import { createBlog, updateBlog } from "./blogSlice";
 import ImageUpload from "../../components/common/ImageUpload";
@@ -15,7 +17,7 @@ const CreateEditForm = (props) => {
   // These initialValues will be updated on blog edit feature.
   const [initialValues, setInitialValues] = useState({
     title: "",
-    image: "",
+    images: [],
     content: "",
     date: "",
   });
@@ -29,13 +31,13 @@ const CreateEditForm = (props) => {
   const [description, setDescription] = useState({
     status: true,
     count: 0,
+    message: "",
   });
-
+  const [publishDate, setPublishDate] = useState(new Date()); // For Datepicker
   const [requiredImageMessage, setRequiredImageMessage] = useState(false);
   /* Component State Initialize End */
 
   /* use React Hooks and custom Hook start */
-  const dispatch = useDispatch();
   const { submitForm, updateForm, showMessage } = useSubmitForm();
   const blogState = useSelector((state) => state.blog);
   /* use React Hooks and custom Hook end */
@@ -58,22 +60,22 @@ const CreateEditForm = (props) => {
   /* Form Input Validation Schema */
   const validationSchema = object().shape({
     title: string().required("Blog Name is required"),
-    date: string().required("Blog SKU is required"),
   });
 
   /* Call on Form Submit */
   const onSubmit = async (fields, { resetForm, setSubmitting }) => {
-    console.log("description ", description.count);
     if (images.length === 0 && existingImages.length === 0) {
       setRequiredImageMessage(true);
     } else if (description.count < 10) {
       setDescription((prevState) => ({
         ...prevState,
         status: false,
+        message: "Blog Content is required.",
       }));
     } else {
       const id = props.id ? props.id : 0;
       const formDataObj = { id, fields, images, existingImages };
+      console.log("Form Data ", formDataObj);
       const formActionObj = { create: createBlog, update: updateBlog };
       const { status, message } = await submitForm(formDataObj, formActionObj);
       if (status === "success") {
@@ -137,35 +139,45 @@ const CreateEditForm = (props) => {
                       <div className="form-group row">
                         <label className="col-xl-3 col-md-4">Image</label>
                         <div className="col-xl-9 col-md-8">
-                          <div className="checkbox checkbox-primary">
-                            <ImageUpload
-                              imagesObj={{ images, setImages }}
-                              existingImages={existingImages}
-                              requiredImageObj={{
-                                requiredImageMessage,
-                                setRequiredImageMessage,
-                              }}
-                            />
-                          </div>
+                          <ImageUpload
+                            imagesObj={{ images, setImages }}
+                            existingImages={existingImages}
+                            requiredImageObj={{
+                              requiredImageMessage,
+                              setRequiredImageMessage,
+                            }}
+                          />
                         </div>
                       </div>
                       <div className="form-group row">
                         <label className="col-xl-3 col-md-4">Content</label>
                         <div className="col-xl-9 col-md-8">
-                          <div className="checkbox checkbox-primary">
-                            <TextEditor
-                              labelName="Description"
-                              initialValues={initialValues}
-                              setFieldValue={setFieldValue}
-                              descriptionObj={{
-                                description,
-                                setDescription,
-                              }}
-                            />
-                          </div>
+                          <TextEditor
+                            labelName="Description"
+                            initialValues={initialValues}
+                            setFieldValue={setFieldValue}
+                            descriptionObj={{
+                              description,
+                              setDescription,
+                            }}
+                          />
                         </div>
                       </div>
-
+                      <div className="form-group row">
+                        <label className="col-xl-3 col-md-4">
+                          Published Date
+                        </label>
+                        <div className="col-xl-2 col-md-2">
+                          <DatePicker
+                            className="form-control"
+                            selected={publishDate}
+                            onChange={(date) => {
+                              setPublishDate(date);
+                              setFieldValue("date", date);
+                            }}
+                          />
+                        </div>
+                      </div>
                       <div className="form-group mb-0">
                         <button type="submit" className="btn btn-primary">
                           {isSubmitting && (
