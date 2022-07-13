@@ -22,7 +22,6 @@ const ImageUpload = ({ imagesObj, existingImages, requiredImageObj }) => {
 
   return (
     <>
-      {/* <label className="col-form-label pt-0"> Image Upload</label> */}
       <Dropzone
         onDrop={(acceptedFiles) => {
           setImages((prevState) => [
@@ -47,7 +46,7 @@ const ImageUpload = ({ imagesObj, existingImages, requiredImageObj }) => {
         )}
       </Dropzone>
       {requiredImageMessage && (
-        <div className="required-image">Product Image is required.</div>
+        <div className="required-image">Image is required to upload.</div>
       )}
       <ErrorMessage
         name="images"

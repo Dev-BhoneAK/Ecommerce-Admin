@@ -189,3 +189,9 @@
   margin-top: 1.5rem;
 }
 /* Server Form Response Message End */
+
+/* Set CKeditor Minimum Row Height Start */
+.ck-editor__editable {
+  min-height: 300px;
+}
+/* Set CKeditor Minimum Row Height End */
