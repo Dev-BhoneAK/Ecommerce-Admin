@@ -3,7 +3,12 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import sanitizeHtml from "sanitize-html";
 
-const TextEditor = ({ initialValues, setFieldValue, descriptionObj }) => {
+const TextEditor = ({
+  initialValues,
+  setEditor,
+  setFieldValue,
+  descriptionObj,
+}) => {
   const { description, setDescription } = descriptionObj;
   const sanitizeConfig = {
     allowedTags: [],
@@ -14,6 +19,9 @@ const TextEditor = ({ initialValues, setFieldValue, descriptionObj }) => {
       <CKEditor
         editor={ClassicEditor}
         data={initialValues?.description}
+        onReady={(editor) => {
+          setEditor(editor);
+        }}
         onFocus={() => {
           setDescription((prevState) => ({
             ...prevState,
