@@ -1,26 +1,31 @@
 /**
  * @module blogService
  */
-const blogDAL = require('../DAL/blogDAL');
+const blogDAL = require("../DAL/blogDAL");
 
 exports.getAllBlogs = async () => {
-    const blogs = await blogDAL.findAllBlogs();
-    return blogs;
+  const blogs = await blogDAL.findAllBlogs();
+  const responseData = blogs.map((blog) => ({
+    ...blog._doc,
+    images: "http://localhost:5000/" + blog.images,
+  }));
+  console.log("responseData ", responseData);
+  return responseData;
 };
 
-exports.getBlog =  async (blogId) => {
-    const blogs = await blogDAL.findBlogById(blogId);
-    return blogs;
+exports.getBlog = async (blogId) => {
+  const blogs = await blogDAL.findBlogById(blogId);
+  return blogs;
 };
 
 exports.createBlog = async (blog) => {
-    return await blogDAL.createBlog(blog);;
-}
+  return await blogDAL.createBlog(blog);
+};
 
 exports.updateBlog = async (blogId, blog) => {
-    return await blogDAL.updateBlog(blogId, blog);
-}
+  return await blogDAL.updateBlog(blogId, blog);
+};
 
 exports.deleteBlog = async (blogId) => {
-    return await blogDAL.deleteBlog(blogId);
-}
+  return await blogDAL.deleteBlog(blogId);
+};

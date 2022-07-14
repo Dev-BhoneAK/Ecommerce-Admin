@@ -10,7 +10,7 @@ const blogSchema = mongoose.Schema(
       type: Array,
       required: true,
     },
-    content: {
+    description: {
       type: String,
       required: true,
     },

@@ -34,7 +34,4 @@ const multerOption = multer({
 });
 
 exports.fileUpload = multerOption.single("image");
-// exports.multiFileUpload = multerOption.any('images[]');
-exports.multiFileUpload = multerOption.array("images", 5);
-// exports.multiFileUpload = multerOption.fields([{name:'images',maxCount:5}]);
-// exports.multiFileUpload = (req, file) => console.log(file.fieldname);
+exports.multiFileUpload = multerOption.array("images", 5); // maximum image upload set to 5.
