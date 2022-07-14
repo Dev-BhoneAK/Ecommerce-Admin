@@ -17,28 +17,17 @@ const CreateEditForm = () => {
     name: "",
     parent: "",
   });
+  const [brandLogo, setBrandLogo] = useState("");
+  const [requiredLogoMessage, setRequiredLogoMessage] = useState(false);
 
   useEffect(() => {
     if (id !== 0) {
       const brand = brandItems.filter((brand) => brand._id === id)[0];
-      // Object.keys(initialValues).map((key) => {
-      //     console.log(key);
-      //     setInitialValues(prevState => ({
-      //         ...prevState,
-      //         [key]: brand[key]
-      //     }))
-      // })
-      // const objKeys = Object.keys(initialValues).forEach((key) => ({
-      //     [key]: brand[key]
-      // }));
       const objKeys = Object.keys(initialValues).reduce((obj, char, index) => {
         obj[char] = brand[char];
         return obj;
       }, {});
       console.log("objKeys ", objKeys);
-      // setInitialValues(prevState => (Object.keys(initialValues).map((key) => ({ ...prevState, [key]: brand[key] }))));
-      // setInitialValues(Object.keys(initialValues).map((key, prevState) =>
-      //     ({ ...prevState, [key]: brand[key] })));
       setInitialValues((prevState) => ({
         ...prevState,
         ...objKeys,
@@ -46,15 +35,15 @@ const CreateEditForm = () => {
     }
   }, [id]);
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().required("Brand Name is required"),
   });
 
   const onSubmit = async (brandFields, { resetForm, setSubmitting }) => {
     console.log("onSubmit ", brandFields);
-    brandFields.path =
-      (brandFields.parent === "" ? "/" : brandFields.parent) +
-      "/" +
-      brandFields.name;
+    if (brandLogo === "") {
+      setRequiredLogoMessage(true);
+      return false;
+    }
     try {
       let message = "";
       if (id === 0) {
@@ -116,28 +105,43 @@ const CreateEditForm = () => {
                     className="invalid-feedback"
                   />
                 </div>
+
                 <div className="form-group mb-0">
-                  <label className="mb-1">Parent Brand :</label>
-                  <Field
-                    name="parent"
-                    as="select"
-                    className={
-                      "form-control" +
-                      (errors.parent && touched.parent ? " is-invalid" : "")
-                    }
-                  >
-                    <option value="/">--Select--</option>
-                    {brandItems.map((brand) => (
-                      <option value={brand.path} key={brand._id}>
-                        {brand.name}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="parent"
-                    component="div"
-                    className="invalid-feedback"
+                  <label className="mb-1">Brand Image :</label>
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    onChange={(event) => {
+                      const file = event.currentTarget.files[0];
+                      setBrandLogo(URL.createObjectURL(file));
+                      setFieldValue("image", file);
+                      setRequiredLogoMessage(false);
+                    }}
+                    className="form-control"
                   />
+                </div>
+                {requiredLogoMessage && (
+                  <div className="required-image">
+                    Brand Logo is required to upload.
+                  </div>
+                )}
+                <div className="form-group show-images">
+                  {brandLogo !== "" && (
+                    <div className="image-area">
+                      <img
+                        className="show-image"
+                        src={brandLogo}
+                        alt="Brand Logo"
+                      />
+                      <button
+                        className="remove-image"
+                        onClick={() => setBrandLogo("")}
+                      >
+                        &#215;
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="form-group status-message">
                   {statusMessage?.status === "success" ? (

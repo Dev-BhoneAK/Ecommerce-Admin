@@ -18,8 +18,8 @@ const CreateEditForm = (props) => {
   const [initialValues, setInitialValues] = useState({
     title: "",
     images: [],
-    content: "",
-    date: "",
+    description: "",
+    date: new Date().getTime(),
   });
   const [images, setImages] = useState([]); // For new image upload, use blogImages state
   const [existingImages, setexistingImages] = useState([]); // For created blog's image, use existingImages state
@@ -33,6 +33,7 @@ const CreateEditForm = (props) => {
     count: 0,
     message: "",
   });
+  const [editor, setEditor] = useState("");
   const [publishDate, setPublishDate] = useState(new Date()); // For Datepicker
   const [requiredImageMessage, setRequiredImageMessage] = useState(false);
   /* Component State Initialize End */
@@ -70,18 +71,19 @@ const CreateEditForm = (props) => {
       setDescription((prevState) => ({
         ...prevState,
         status: false,
-        message: "Blog Content is required.",
+        message: "Blog Content should be at least 10 characters.",
       }));
     } else {
       const id = props.id ? props.id : 0;
       const formDataObj = { id, fields, images, existingImages };
-      console.log("Form Data ", formDataObj);
       const formActionObj = { create: createBlog, update: updateBlog };
       const { status, message } = await submitForm(formDataObj, formActionObj);
       if (status === "success") {
         updateForm(id, { resetForm, initialValues, setInitialValues });
         setImages([]);
         setexistingImages([]);
+        editor.setData("");
+        setPublishDate(new Date());
         showMessage({
           setStatusMessage,
           status,
@@ -155,6 +157,7 @@ const CreateEditForm = (props) => {
                           <TextEditor
                             labelName="Description"
                             initialValues={initialValues}
+                            setEditor={setEditor}
                             setFieldValue={setFieldValue}
                             descriptionObj={{
                               description,
@@ -173,7 +176,7 @@ const CreateEditForm = (props) => {
                             selected={publishDate}
                             onChange={(date) => {
                               setPublishDate(date);
-                              setFieldValue("date", date);
+                              setFieldValue("date", date.getTime());
                             }}
                           />
                         </div>

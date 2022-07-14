@@ -27,6 +27,7 @@ const CreateEditForm = (props) => {
   });
   const [images, setImages] = useState([]); // For new image upload, use images state
   const [existingImages, setexistingImages] = useState([]); // For created product's image, use existingImages state
+  const [editor, setEditor] = useState("");
   // For server response message, use statusMessage state
   const [statusMessage, setStatusMessage] = useState({
     status: "",
@@ -111,6 +112,7 @@ const CreateEditForm = (props) => {
         updateForm(id, { resetForm, initialValues, setInitialValues });
         setImages([]);
         setexistingImages([]);
+        editor.setData("");
         showMessage({
           setStatusMessage,
           status,
@@ -246,6 +248,7 @@ const CreateEditForm = (props) => {
                         <TextEditor
                           labelName="Description"
                           initialValues={initialValues}
+                          setEditor={setEditor}
                           setFieldValue={setFieldValue}
                           descriptionObj={{
                             description,
