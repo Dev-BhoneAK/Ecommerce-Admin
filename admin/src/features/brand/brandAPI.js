@@ -8,8 +8,16 @@ export const getAllBrandsAPI = async () => {
 };
 
 export const saveBrandAPI = async (brand) => {
-  const responseData = await axios.post(API, brand);
-  return responseData;
+  try {
+    const responseData = await axios.post(API, brand, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    return responseData;
+  } catch (err) {
+    console.log("err ", err);
+  }
 };
 
 export const updateBrandAPI = async (brandId, brand) => {
