@@ -10,6 +10,8 @@ import ProductEdit from "./screens/Product/Edit";
 import BlogList from "./screens/Blog/List";
 import BlogCreate from "./screens/Blog/Create";
 import BlogEdit from "./screens/Blog/Edit";
+import OrderList from "./screens/Order/List";
+import OrderDetail from "./screens/Order/Detail";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="blogs" element={<BlogList />} />
         <Route path="blogs/create" element={<BlogCreate />} />
         <Route path="blogs/:id" element={<BlogEdit />} />
+        <Route path="orders" element={<OrderList />} />
+        <Route path="orders/detail" element={<OrderDetail />} />
       </Route>
     </Routes>
   );
