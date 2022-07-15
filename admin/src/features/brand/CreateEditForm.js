@@ -15,7 +15,6 @@ const CreateEditForm = () => {
   });
   const [initialValues, setInitialValues] = useState({
     name: "",
-    parent: "",
   });
   const [brandLogo, setBrandLogo] = useState("");
   const [requiredLogoMessage, setRequiredLogoMessage] = useState(false);
@@ -58,6 +57,7 @@ const CreateEditForm = () => {
         status: "success",
         message: message,
       }));
+      setBrandLogo("");
       resetForm();
     } catch (err) {
       console.error("Failed to save the post: ", err);

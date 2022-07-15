@@ -7,9 +7,8 @@ exports.getAllBlogs = async () => {
   const blogs = await blogDAL.findAllBlogs();
   const responseData = blogs.map((blog) => ({
     ...blog._doc,
-    images: "http://localhost:5000/" + blog.images,
+    images: process.env.DOMAIN_URI + blog.images,
   }));
-  console.log("responseData ", responseData);
   return responseData;
 };
 
