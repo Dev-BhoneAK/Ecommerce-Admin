@@ -7,7 +7,7 @@ import { getProductById } from "../product/productSlice";
 import { createProduct, updateProduct } from "./productSlice";
 import ImageUpload from "../../components/common/ImageUpload";
 import TextEditor from "../../components/common/TextEditor";
-import useSubmitForm from "./useSubmitForm";
+import useSubmitForm from "../../utility/customHook/useSubmitForm";
 import { setInitialValuesToForm } from "../../utility/helpers";
 
 const CreateEditForm = (props) => {
