@@ -38,7 +38,7 @@ export const menuItems = [
       },
       {
         name: "Product Review",
-        link: "/product-review",
+        link: "/products/review",
       },
     ],
   },

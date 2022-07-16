@@ -6,6 +6,7 @@ import BrandList from "./screens/Brand/List";
 import CategoryList from "./screens/Category/List";
 import ProductList from "./screens/Product/List";
 import ProductCreate from "./screens/Product/Create";
+import ProductReviews from "./screens/Product/Reviews";
 import ProductEdit from "./screens/Product/Edit";
 import BlogList from "./screens/Blog/List";
 import BlogCreate from "./screens/Blog/Create";
@@ -23,6 +24,7 @@ function App() {
         <Route path="categories" element={<CategoryList />} />
         <Route path="products" element={<ProductList />} />
         <Route path="products/create" element={<ProductCreate />} />
+        <Route path="products/review" element={<ProductReviews />} />
         <Route path="products/:id" element={<ProductEdit />} />
         <Route path="blogs" element={<BlogList />} />
         <Route path="blogs/create" element={<BlogCreate />} />
