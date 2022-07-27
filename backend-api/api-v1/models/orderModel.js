@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Product = require("./productModel");
+const User = require("./userModel");
 
 const orderSchema = mongoose.Schema(
   {
@@ -6,6 +8,7 @@ const orderSchema = mongoose.Schema(
       id: {
         type: String,
         required: true,
+        unique: true,
       },
       status: {
         type: String,
@@ -16,16 +19,16 @@ const orderSchema = mongoose.Schema(
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          ref: Product,
           required: true,
         },
-        quantity: { type: String, required: true },
+        quantity: { type: Number, required: true },
         price: { type: mongoose.Decimal128, required: true },
       },
     ],
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: User,
       required: true,
     },
     payment: {
@@ -34,10 +37,10 @@ const orderSchema = mongoose.Schema(
         required: true,
       },
       result: {
-        id: { type: String, required: true },
-        email: { type: String, required: true },
-        status: { type: String, required: true },
-        update_time: { type: String, required: true },
+        id: { type: String },
+        email: { type: String },
+        status: { type: String },
+        update_time: { type: String },
       },
       isPaid: {
         type: Boolean,
