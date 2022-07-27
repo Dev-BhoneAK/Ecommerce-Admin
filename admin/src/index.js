@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./css/datatables.css";
-import "./css/bootstrap.css";
 import "./css/font-awesome.css";
 import "./css/style.css";
 import "./css/animate.css";

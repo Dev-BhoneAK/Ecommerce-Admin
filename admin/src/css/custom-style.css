@@ -195,3 +195,8 @@
   min-height: 300px;
 }
 /* Set CKeditor Minimum Row Height End */
+
+.read-more {
+  cursor: pointer;
+  color: #e54e4e;
+}

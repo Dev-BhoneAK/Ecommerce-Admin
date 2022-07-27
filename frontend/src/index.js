@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './css/bootstrap.css';
 import './css/themify-icons.css';
 import './css/font-awesome.css';
 import './css/style.css';
