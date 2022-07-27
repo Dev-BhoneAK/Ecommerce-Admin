@@ -58,7 +58,7 @@ const orderSlice = createSlice({
         state.loadingStatus = "loading";
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        console.log("Api fullfilled ", action.payload);
+        console.log("Order Items ", action.payload);
         state.orderItems = action.payload;
         state.loadingStatus = "idle";
       })

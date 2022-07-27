@@ -3,12 +3,14 @@ const { brandsData } = require("./data/brandsData");
 const { categoriesData } = require("./data/categoriesData");
 const { productsData } = require("./data/productsData");
 const { reviewsData } = require("./data/reviewsData");
+const { ordersData } = require("./data/ordersData");
 const { usersData } = require("./data/usersData");
 const User = require("../models/userModel");
 const Brand = require("../models/brandModel");
 const Category = require("../models/categoryModel");
 const Product = require("../models/productModel");
 const Review = require("../models/reviewModel");
+const Order = require("../models/orderModel");
 const database = require("../config/database");
 
 require("dotenv").config();
@@ -22,6 +24,7 @@ const importData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
     await Review.deleteMany();
+    await Order.deleteMany();
 
     const createdBrands = await Brand.insertMany(brandsData);
     const createdUsers = await User.insertMany(usersData);
@@ -49,6 +52,19 @@ const importData = async () => {
     });
 
     await Review.insertMany(reviews);
+
+    const orders = ordersData.map((order, index) => {
+      return {
+        ...order,
+        orderItems: order.orderItems.map((orderItem, index) => ({
+          ...orderItem,
+          product: createdProducts[index]._id,
+        })),
+        user: consumerUser,
+      };
+    });
+
+    await Order.insertMany(orders);
 
     console.log("Data Imported Successfully!");
     process.exit(0);
