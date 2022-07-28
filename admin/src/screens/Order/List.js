@@ -31,17 +31,22 @@ const OrderList = () => {
     {
       dataField: "orderInfo.id",
       text: "Order ID",
+      sort: true,
     },
     {
       dataField: "orderItems",
       text: "Order Items",
-      //   formatter: (cellContent, row) => {
-      //     const categoryPathArr = row.info.category.split("/");
-      //     const childCategory = categoryPathArr[categoryPathArr.length - 1];
-      //     row.orderItems.map((item) => (
-      //       <img width="75" height="75" src={row.info.images[0]} alt="Item" />
-      //     ));
-      //   },
+      formatter: (cellContent, row) => (
+        <div className="d-flex align-items-center">
+          {row.orderItems.map((orderItem) => (
+            <img
+              className="img-fluid img-30 me-2 blur-up lazyloaded"
+              src={orderItem.product.info.images}
+              alt="Item"
+            />
+          ))}
+        </div>
+      ),
     },
     {
       dataField: "payment.result.status",
@@ -59,8 +64,17 @@ const OrderList = () => {
       sort: true,
     },
     {
-      dataField: "order.createdAt",
+      dataField: "createdAt",
       text: "Order Created Date",
+      formatter: (cellContent, row) => {
+        const localDate = new Date(row.createdAt);
+        const localDateString = localDate.toLocaleDateString(undefined, {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+        return <div>{localDateString}</div>;
+      },
       sort: true,
     },
     {
@@ -70,7 +84,7 @@ const OrderList = () => {
       formatter: (cellContent, row) => {
         return (
           <>
-            <Link to="/detail">View Detail</Link>
+            <Link to="detail">View Detail</Link>
           </>
         );
       },
