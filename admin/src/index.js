@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import "./css/datatables.css";
 import "./css/style.css";
 import "./css/custom-style.css";
 import { Provider } from "react-redux";
