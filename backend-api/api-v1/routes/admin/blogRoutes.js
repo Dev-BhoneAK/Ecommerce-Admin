@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { multiFileUpload } = require("../middleware/fileUploadMiddleware");
+const { multiFileUpload } = require("../../middleware/fileUploadMiddleware");
 
-const blogController = require("../controllers/blogController");
+const blogController = require("../../controllers/blogController");
 
 router.get("/", blogController.getAllBlogs);
 

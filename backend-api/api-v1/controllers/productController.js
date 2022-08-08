@@ -61,3 +61,42 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
   }
   res.status(200).json(deletedProduct);
 });
+
+exports.getProduct = asyncHandler(async (req, res) => {
+  const productId = req.params.productId;
+  const product = await productService.getProduct(productId);
+  if (!product) {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+  res.status(200).json(product);
+});
+
+/* Consumer Endpoint Start */
+exports.getDiscountProducts = asyncHandler(async (req, res) => {
+  const product = await productService.getDiscountProducts();
+  if (!product) {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+  res.status(200).json(product);
+});
+
+exports.getNewArrivalProducts = asyncHandler(async (req, res) => {
+  const product = await productService.getNewArrivalProducts();
+  if (!product) {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+  res.status(200).json(product);
+});
+
+exports.getTrendingProducts = asyncHandler(async (req, res) => {
+  const product = await productService.getTrendingProducts();
+  if (!product) {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+  res.status(200).json(product);
+});
+/* Consumer Endpoint End */

@@ -14,6 +14,7 @@ exports.productsData = [
     },
     pricing: {
       basePrice: 123.99,
+      discount: 0
     },
     totalStockCount: 1,
   },
@@ -32,6 +33,7 @@ exports.productsData = [
     },
     pricing: {
       basePrice: 89.99,
+      discount: 10
     },
     totalStockCount: 10,
   },
@@ -50,6 +52,7 @@ exports.productsData = [
     },
     pricing: {
       basePrice: 299.99,
+      discount: 15
     },
     totalStockCount: 2,
   },
@@ -69,6 +72,7 @@ exports.productsData = [
     },
     pricing: {
       basePrice: 599.99,
+      discount: 20
     },
     totalStockCount: 5,
   },
@@ -87,6 +91,7 @@ exports.productsData = [
     },
     pricing: {
       basePrice: 59.99,
+      discount: 30
     },
     totalStockCount: 12,
   },
@@ -105,6 +110,7 @@ exports.productsData = [
     },
     pricing: {
       basePrice: 159.99,
+      discount: 5
     },
     totalStockCount: 8,
   },
