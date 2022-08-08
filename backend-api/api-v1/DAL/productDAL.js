@@ -57,3 +57,26 @@ exports.updateProduct = async (productId, product) => {
 exports.deleteProduct = async (productId) => {
   return await Product.findByIdAndDelete(productId);
 };
+
+/* Consumer Endpoint Start */
+exports.getDiscountProducts = async () => {
+
+  const discountProducts = await productModel.find({"pricing.discount": {$ne: 0}}).sort({ createdAt: "desc"}).limit(5);
+
+  return discountProducts;
+};
+
+exports.getNewArrivalProducts = async () => {
+
+  const newArrivalProducts = await productModel.find().sort({ createdAt: "desc"}).limit(5);
+
+  return newArrivalProducts;
+};
+
+exports.getTrendingProducts = async () => {
+
+  const trendingProducts = await productModel.find().sort({ createdAt: "desc"}).limit(5);
+
+  return trendingProducts;
+};
+/* Consumer Endpoint End */

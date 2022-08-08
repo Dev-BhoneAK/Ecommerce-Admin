@@ -15,7 +15,7 @@ const productSchema = mongoose.Schema({
     },
     pricing: {
         basePrice: { type: mongoose.Decimal128, required: true},
-        discount: mongoose.Decimal128,
+        discount: { type: Number, required: true, default: 0 },
     },
     totalStockCount: {
         type: Number,
