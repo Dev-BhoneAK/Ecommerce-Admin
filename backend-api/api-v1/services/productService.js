@@ -24,3 +24,17 @@ exports.updateProduct = async (productId, product) => {
 exports.deleteProduct = async (productId) => {
     return await productDAL.deleteProduct(productId);
 }
+
+/* Consumer Endpoint Start */
+exports.getDiscountProducts = async () => {
+    return await productDAL.getDiscountProducts();
+}
+
+exports.getNewArrivalProducts = async () => {
+    return await productDAL.getNewArrivalProducts();
+}
+
+exports.getTrendingProducts = async () => {
+    return await productDAL.getTrendingProducts();
+}
+/* Consumer Endpoint End */
