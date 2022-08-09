@@ -1,4 +1,8 @@
 /* NAV MENU START */
+html, :root{
+    scroll-behavior: auto;
+}
+
 .hover-underline:after {
     content: '';
     position: absolute;
