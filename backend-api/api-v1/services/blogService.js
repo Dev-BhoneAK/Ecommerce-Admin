@@ -28,3 +28,11 @@ exports.updateBlog = async (blogId, blog) => {
 exports.deleteBlog = async (blogId) => {
   return await blogDAL.deleteBlog(blogId);
 };
+
+/* Consumer Endpoint Start */
+exports.getLatestBlogs = async () => {
+  const blogs = await blogDAL.getLatestBlogs();
+  return blogs;
+};
+/* Consumer Endpoint End */
+
