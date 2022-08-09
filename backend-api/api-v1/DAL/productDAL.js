@@ -1,5 +1,4 @@
 const productModel = require("../models/productModel");
-const Product = require("../models/productModel");
 
 exports.findAllProducts = async () => {
   const products = await productModel.find().sort({ createdAt: "desc" });
@@ -29,7 +28,7 @@ exports.createProduct = (product) => {
     pricing: { basePrice },
     totalStockCount,
   };
-  const newProduct = new Product(productObj);
+  const newProduct = new productModel(productObj);
   return newProduct.save();
 };
 
@@ -51,32 +50,26 @@ exports.updateProduct = async (productId, product) => {
     pricing: { basePrice },
     totalStockCount,
   };
-  return await Product.findByIdAndUpdate(productId, productObj);
+  return await productModel.findByIdAndUpdate(productId, productObj);
 };
 
 exports.deleteProduct = async (productId) => {
-  return await Product.findByIdAndDelete(productId);
+  return await productModel.findByIdAndDelete(productId);
 };
 
 /* Consumer Endpoint Start */
 exports.getDiscountProducts = async () => {
-
   const discountProducts = await productModel.find({"pricing.discount": {$ne: 0}}).sort({ createdAt: "desc"}).limit(5);
-
   return discountProducts;
 };
 
 exports.getNewArrivalProducts = async () => {
-
   const newArrivalProducts = await productModel.find().sort({ createdAt: "desc"}).limit(5);
-
   return newArrivalProducts;
 };
 
 exports.getTrendingProducts = async () => {
-
   const trendingProducts = await productModel.find().sort({ createdAt: "desc"}).limit(5);
-
   return trendingProducts;
 };
 /* Consumer Endpoint End */
