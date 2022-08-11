@@ -57,3 +57,14 @@ exports.deleteBlog = asyncHandler(async (req, res) => {
   }
   res.status(200).json(deletedBlog);
 });
+
+/* Consumer Endpoint Start */
+exports.getLatestBlogs = async (req, res) => {
+  const blogs = await blogService.getLatestBlogs();
+  if (!blogs) {
+    res.status(404);
+    throw new Error("Blogs Not Found");
+  }
+  res.status(200).json(blogs);
+};
+/* Consumer Endpoint End */

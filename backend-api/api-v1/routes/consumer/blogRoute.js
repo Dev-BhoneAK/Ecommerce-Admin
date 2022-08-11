@@ -3,8 +3,7 @@ const router = express.Router();
 
 const blogController = require('../../controllers/blogController');
 
-router.get('/latest', blogController.getLatestBlogs);
-// router.get('/new-arrival', productController.getNewArrivalProducts);
-// router.get('/trending', productController.getTrendingProducts);
+// router.get('/latest', blogController.getLatestBlogs);
+router.get('/all', blogController.getAllBlogs);
 
 module.exports = router;
