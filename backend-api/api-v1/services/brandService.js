@@ -8,7 +8,6 @@ exports.getAllBrands = async () => {
     ...brand._doc,
     logo: process.env.DOMAIN_URI + brand.logo,
   }));
-  console.log("response data ", responseData);
   return responseData;
 };
 
