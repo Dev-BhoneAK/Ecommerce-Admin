@@ -1,13 +1,12 @@
-const userModel = require('../models/userModel');
 const User = require("../models/userModel");
 
 exports.findAllUsers = async () => {
-    const users = await userModel.find();
+    const users = await User.find();
     return users;
 }
 
 exports.findUserById = async (userId) => {
-    const user = await userModel.findById(userId);
+    const user = await User.findById(userId);
     return user;
 }
 
@@ -17,9 +16,15 @@ exports.createUser = (user) => {
 }
 
 exports.updateUser = async (userId, user) => {
-    return  await User.findByIdAndUpdate(userId, user);
+    return await User.findByIdAndUpdate(userId, user);
 }
 
 exports.deleteUser = async (userId) => {
     return await User.findByIdAndDelete(userId);
 }
+
+/* Admin Login */
+exports.findUserByCredentials = async (email, password) => {
+    return await User.findOne({email, password});
+}
+/* Admin Login */
