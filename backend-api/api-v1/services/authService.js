@@ -9,12 +9,11 @@ exports.login = async (email, password) => {
   return await userDAL.findUserByCredentials(email, password);
 };
 
-exports.generateTokens = (user) => {
+exports.generateTokens = (userId) => {
   //creating a access token
   const accessToken = jwt.sign(
     {
-      username: userCredentials.username,
-      email: userCredentials.email,
+      userId,
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
@@ -25,19 +24,11 @@ exports.generateTokens = (user) => {
   // Creating refresh token
   const refreshToken = jwt.sign(
     {
-      username: userCredentials.username,
+      userId,
     },
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: "10m" }
   );
-
-  // Assigning refresh token in http-only cookie
-  res.cookie("jwt", refreshToken, {
-    httpOnly: true,
-    sameSite: "None",
-    secure: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  });
-  return res.json({ accessToken });
+  return { accessToken, refreshToken };
 };
 /* Admin Login */
