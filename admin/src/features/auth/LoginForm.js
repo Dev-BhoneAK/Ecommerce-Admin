@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 
+import { login } from "./authSlice";
+
 const LoginForm = () => {
   const [initialValues, setInitialValues] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [statusMessage, setStatusMessage] = useState({
@@ -17,15 +19,14 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("username is required"),
+    email: Yup.string().required("username is required"),
     password: Yup.string().required("password is required"),
   });
 
   const onSubmit = async (userCredentials, { resetForm, setSubmitting }) => {
     console.log("onSubmit ", userCredentials);
     try {
-      let message = "";
-      //   await dispatch(updateCategory({ id, categoryFields })).unwrap();
+      await dispatch(login(userCredentials)).unwrap();
       navigate("/admin/home");
     } catch (err) {
       console.error("Failed to login: ", err);
@@ -56,15 +57,16 @@ const LoginForm = () => {
           <Form>
             <div className="form-group">
               <Field
-                name="username"
+                name="email"
                 type="text"
+                placeholder="Username"
                 className={
                   "form-control" +
-                  (errors.username && touched.username ? " is-invalid" : "")
+                  (errors.email && touched.email ? " is-invalid" : "")
                 }
               />
               <ErrorMessage
-                name="username"
+                name="email"
                 component="div"
                 className="invalid-feedback"
               />
@@ -73,6 +75,7 @@ const LoginForm = () => {
               <Field
                 name="password"
                 type="password"
+                placeholder="Password"
                 className={
                   "form-control" +
                   (errors.password && touched.password ? " is-invalid" : "")
@@ -84,10 +87,14 @@ const LoginForm = () => {
                 className="invalid-feedback"
               />
             </div>
+            <div className="form-group status-message">
+              {statusMessage?.status === "error" && (
+                <h5 className="text-danger f-w-600">
+                  {statusMessage?.message}
+                </h5>
+              )}
+            </div>
             <div className="form-button">
-              {/* <button className="btn btn-primary" type="submit">
-                Login
-              </button> */}
               <button
                 type="submit"
                 disabled={isSubmitting}
