@@ -73,6 +73,4 @@ const brandSlice = createSlice({
   },
 });
 
-console.log(brandSlice);
-
 export default brandSlice.reducer;
