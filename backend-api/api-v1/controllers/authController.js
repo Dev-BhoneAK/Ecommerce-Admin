@@ -9,9 +9,10 @@ exports.login = asyncHandler(async (req, res) => {
   const password = req.body.password;
   const user = await authService.login(email, password);
   if (!user) {
-    res.status(404);
-    throw new Error("Invalid credentials");
+    res.status(401);
+    throw new Error("Invalid Credentials");
   }
+
   const { accessToken, refreshToken } = await authService.generateTokens(
     user._id
   );
