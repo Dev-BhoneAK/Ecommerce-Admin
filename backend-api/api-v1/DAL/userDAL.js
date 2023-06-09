@@ -25,6 +25,15 @@ exports.deleteUser = async (userId) => {
 
 /* Admin Login */
 exports.findUserByCredentials = async (email, password) => {
-  return await User.findOne({ email });
+  const user = await User.findOne({ email });
+  if (user) {
+    const isMatch = await user.comparePassword(password);
+    console.log(isMatch);
+    if (isMatch) {
+      return user;
+    }
+    return null;
+  }
+  return null;
 };
 /* Admin Login */
