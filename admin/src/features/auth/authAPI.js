@@ -7,8 +7,9 @@ export const loginAPI = async (userCredentials) => {
       API_URL + "auth/login",
       userCredentials
     );
+    console.log("responseData ", responseData);
     return responseData;
   } catch (err) {
-    console.log("err ", err);
+    throw new Error(err.response.data.message);
   }
 };
