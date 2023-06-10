@@ -29,11 +29,10 @@ const LoginForm = () => {
       await dispatch(login(userCredentials)).unwrap();
       navigate("/admin/home");
     } catch (err) {
-      console.error("Failed to login: ", err);
       setStatusMessage((prevState) => ({
         ...prevState,
         status: "error",
-        message: err.name + ": " + err.message,
+        message: err.message,
       }));
       setSubmitting(false);
     } finally {
