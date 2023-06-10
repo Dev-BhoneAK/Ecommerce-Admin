@@ -9,8 +9,9 @@ exports.login = asyncHandler(async (req, res) => {
   const password = req.body.password;
   const user = await authService.login(email, password);
   if (!user) {
-    res.status(401);
-    throw new Error("Invalid Credentials");
+    return res.status(401).json({ message: "Invalid Credentials" });
+    // res.status(401);
+    // throw new Error("Invalid Credentials");
   }
 
   const { accessToken, refreshToken } = await authService.generateTokens(
@@ -24,5 +25,5 @@ exports.login = asyncHandler(async (req, res) => {
     secure: process.env.NODE_ENV === "production",
     maxAge: 10 * 60 * 1000, // 10 minutes
   });
-  return res.status(200).json({ accessToken });
+  res.json(accessToken);
 });
