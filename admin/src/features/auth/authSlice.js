@@ -17,9 +17,9 @@ const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      console.log("Api fullfilled ", action.payload);
-      state.userInfo = action.payload;
-      localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      const userInfo = JSON.stringify(action.payload);
+      state.userInfo = userInfo;
+      localStorage.setItem("userInfo", userInfo);
     });
   },
 });
