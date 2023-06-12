@@ -29,10 +29,21 @@ exports.consumerAuth = asyncHandler(async (req, res, next) => {
 
 // For admin endpoints
 exports.adminAuth = (req, res, next) => {
-  if (req.user && req.user.isAdmin) {
-    next();
-  } else {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
     res.status(401);
     throw new Error("Not authorized as an admin");
   }
+  const token = authHeader.split(" ")[1];
+  console.log("Token ", token);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      console.log(err);
+      res.status(401);
+      throw new Error("Not authorized as an admin");
+    }
+    req.user = user.userId;
+    next();
+  });
 };
