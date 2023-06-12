@@ -7,13 +7,14 @@ const products = require("./productRoutes");
 const orders = require("./orderRoutes");
 const reviews = require("./reviewRoutes");
 const auth = require("./authRoutes");
+const { adminAuth } = require("../../middleware/authMiddleware");
 
-router.use("/brands", brands);
-router.use("/blogs", blogs);
-router.use("/categories", categories);
-router.use("/products", products);
-router.use("/orders", orders);
-router.use("/reviews", reviews);
+router.use("/brands", adminAuth, brands);
+router.use("/blogs", adminAuth, blogs);
+router.use("/categories", adminAuth, categories);
+router.use("/products", adminAuth, products);
+router.use("/orders", adminAuth, orders);
+router.use("/reviews", adminAuth, reviews);
 router.use("/auth", auth);
 
 module.exports = router;
