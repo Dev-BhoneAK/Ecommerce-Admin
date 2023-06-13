@@ -17,7 +17,8 @@ import OrderList from "./screens/Order/List";
 import OrderDetail from "./screens/Order/Detail";
 
 const ProtectedRoute = () => {
-  const userInfo = useSelector((state) => state?.auth);
+  const userInfo = useSelector((state) => state?.auth?.userInfo);
+  console.log("userInfo ", userInfo);
   return userInfo ? <Outlet /> : <Navigate to="/" replace />;
 };
 
