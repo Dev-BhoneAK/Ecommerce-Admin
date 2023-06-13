@@ -19,8 +19,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("username is required"),
-    password: Yup.string().required("password is required"),
+    email: Yup.string().required("Username is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   const onSubmit = async (userCredentials, { resetForm, setSubmitting }) => {
@@ -54,59 +54,61 @@ const LoginForm = () => {
       {({ errors, touched, isSubmitting, setFieldValue }) => {
         return (
           <Form>
-            <div className="form-group">
-              <Field
-                name="email"
-                type="text"
-                placeholder="Username"
-                className={
-                  "form-control" +
-                  (errors.email && touched.email ? " is-invalid" : "")
-                }
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="invalid-feedback"
-              />
-            </div>
-            <div className="form-group">
-              <Field
-                name="password"
-                type="password"
-                placeholder="Password"
-                className={
-                  "form-control" +
-                  (errors.password && touched.password ? " is-invalid" : "")
-                }
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="invalid-feedback"
-              />
-            </div>
-            <div className="form-group status-message">
-              {statusMessage?.status === "error" && (
-                <h5 className="text-danger f-w-600">
-                  {statusMessage?.message}
-                </h5>
-              )}
-            </div>
-            <div className="form-button">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn btn-primary"
-              >
-                {isSubmitting && (
-                  <span className="spinner-border spinner-border-sm mr-1"></span>
+            <div className="form">
+              <div className="form-group">
+                <Field
+                  name="email"
+                  type="text"
+                  placeholder="Username"
+                  className={
+                    "form-control" +
+                    (errors.email && touched.email ? " is-invalid" : "")
+                  }
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="invalid-feedback"
+                />
+              </div>
+              <div className="form-group">
+                <Field
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  className={
+                    "form-control" +
+                    (errors.password && touched.password ? " is-invalid" : "")
+                  }
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="invalid-feedback"
+                />
+              </div>
+              <div className="form-group status-message">
+                {statusMessage?.status === "error" && (
+                  <h5 className="text-danger f-w-600">
+                    {statusMessage?.message}
+                  </h5>
                 )}
-                {/* {statusMessage?.status === "success" && (
+              </div>
+              <div className="form-button">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary"
+                >
+                  {isSubmitting && (
+                    <span className="spinner-border spinner-border-sm mr-1"></span>
+                  )}
+                  {/* {statusMessage?.status === "success" && (
                   <i className="fa fa-check" aria-hidden="true" />
                 )} */}
-                Login
-              </button>
+                  Login
+                </button>
+              </div>
             </div>
           </Form>
         );
