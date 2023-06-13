@@ -27,13 +27,7 @@ const CreateEditModal = () => {
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            {/*<div className="modal-body">*/}
             <CreateEditForm />
-            {/*</div>*/}
-            {/*<div className="modal-footer">*/}
-            {/*    <button className="btn btn-primary" type="button">Save</button>*/}
-            {/*    <button className="btn btn-secondary" type="button" onClick={toggleModal}>Close</button>*/}
-            {/*</div>*/}
           </div>
         </div>
       </div>
