@@ -1,6 +1,14 @@
 import axios from "axios";
 import { API_URL } from "../config/API";
+import { logout } from "../features/auth/authSlice";
+
 axios.defaults.withCredentials = true;
+
+let store;
+
+export const injectStore = (_store) => {
+  store = _store;
+};
 
 const jwtInterceoptor = axios.create({ withCredentials: true });
 
@@ -16,17 +24,21 @@ jwtInterceoptor.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 400) {
-      console.log("error.response.data.message ", error.response.data.message);
-      let apiResponse = await axios.post(API_URL + "auth/refreshtoken");
+      try {
+        let apiResponse = await axios.post(API_URL + "auth/refreshtoken");
 
-      const userInfo = JSON.stringify(apiResponse.data);
-      console.log("New Access Token ", userInfo);
-      localStorage.setItem("userInfo", userInfo);
-      const newUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-      error.config.headers["Authorization"] = `bearer ${newUserInfo}`;
-      return axios(error.config);
+        const userInfo = JSON.stringify(apiResponse.data);
+        console.log("New Access Token ", userInfo);
+        localStorage.setItem("userInfo", userInfo);
+        const newUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+        error.config.headers["Authorization"] = `bearer ${newUserInfo}`;
+        return axios(error.config);
+      } catch (err) {
+        console.log("refresh token error ", err);
+        await store.dispatch(logout());
+      }
     } else {
-      return Promise.reject(error);
+      throw new Error(error.response.data.message);
     }
   }
 );
