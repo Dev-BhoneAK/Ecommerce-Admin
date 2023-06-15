@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginAPI } from "./authAPI";
+import { loginAPI, logoutAPI } from "./authAPI";
 
 const initialState = {
   userInfo: localStorage.getItem("userInfo")
@@ -12,6 +12,11 @@ export const login = createAsyncThunk("auth/login", async (userCredentials) => {
   return response.data;
 });
 
+export const logout = createAsyncThunk("auth/logout", async () => {
+  const response = await logoutAPI();
+  return response.data;
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -20,6 +25,10 @@ const authSlice = createSlice({
       const userInfo = JSON.stringify(action.payload);
       state.userInfo = userInfo;
       localStorage.setItem("userInfo", userInfo);
+    });
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.userInfo = null;
+      localStorage.removeItem("userInfo");
     });
   },
 });
