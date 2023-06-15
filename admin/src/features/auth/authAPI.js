@@ -7,7 +7,15 @@ export const loginAPI = async (userCredentials) => {
       API_URL + "auth/login",
       userCredentials
     );
-    console.log("responseData ", responseData);
+    return responseData;
+  } catch (err) {
+    throw new Error(err.response.data.message);
+  }
+};
+
+export const logoutAPI = async () => {
+  try {
+    const responseData = await axios.post(API_URL + "auth/logout");
     return responseData;
   } catch (err) {
     throw new Error(err.response.data.message);
