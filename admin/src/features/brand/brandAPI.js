@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { API_URL } from "../../config/API";
 import jwtInterceoptor from "../../utility/jwtInterceptor";
 const API = API_URL + "brands";
