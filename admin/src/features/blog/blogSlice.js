@@ -61,12 +61,12 @@ const blogSlice = createSlice({
       })
       .addCase(updateBlog.fulfilled, (state, action) => {
         state.blogItems = state.blogItems.map((blog) =>
-          blog._id == action.payload._id ? action.payload : blog
+          blog._id === action.payload._id ? action.payload : blog
         );
       })
       .addCase(deleteBlog.fulfilled, (state, action) => {
         state.blogItems = state.blogItems.filter(
-          (blog) => blog._id != action.payload._id
+          (blog) => blog._id !== action.payload._id
         );
       });
   },
