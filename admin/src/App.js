@@ -17,7 +17,6 @@ import OrderList from "./screens/Order/List";
 import OrderDetail from "./screens/Order/Detail";
 
 const ProtectedRoute = ({ userInfo }) => {
-  console.log("userInfo ", userInfo);
   return userInfo ? <Outlet /> : <Navigate to="/" replace />;
 };
 
@@ -26,7 +25,6 @@ function App() {
 
   return (
     <Routes>
-      {/* <Route path="/">{userInfo ? <Navigate to="/home" /> : <Login />}</Route> */}
       <Route
         exact
         path="/"
