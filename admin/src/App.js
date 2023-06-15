@@ -16,17 +16,23 @@ import BlogEdit from "./screens/Blog/Edit";
 import OrderList from "./screens/Order/List";
 import OrderDetail from "./screens/Order/Detail";
 
-const ProtectedRoute = () => {
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
+const ProtectedRoute = ({ userInfo }) => {
   console.log("userInfo ", userInfo);
   return userInfo ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 function App() {
+  const userInfo = useSelector((state) => state?.auth?.userInfo);
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="*" element={<ProtectedRoute />}>
+      {/* <Route path="/">{userInfo ? <Navigate to="/home" /> : <Login />}</Route> */}
+      <Route
+        exact
+        path="/"
+        element={userInfo ? <Navigate to="/admin/home" replace /> : <Login />}
+      />
+      <Route path="*" element={<ProtectedRoute userInfo={userInfo} />}>
         <Route path="admin" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="brands" element={<BrandList />} />
