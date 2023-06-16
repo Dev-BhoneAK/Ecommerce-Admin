@@ -11,9 +11,8 @@ exports.login = asyncHandler(async (req, res) => {
   const password = req.body.password;
   const user = await authService.login(email, password);
   if (!user) {
-    // return res.status(401).json({ message: "Invalid Credentials" });
     res.status(401);
-    throw new Error("Invalid Credentials");
+    throw new Error("Username or Password is incorrect");
   }
 
   const { accessToken, refreshToken } = await authService.generateTokens(
@@ -21,7 +20,7 @@ exports.login = asyncHandler(async (req, res) => {
   );
 
   // Assigning refresh token in http-only cookie
-  res.cookie("jwt", refreshToken, {
+  res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     sameSite: "Strict",
     secure: process.env.NODE_ENV === "production",
@@ -31,10 +30,8 @@ exports.login = asyncHandler(async (req, res) => {
 });
 
 exports.refreshToken = asyncHandler(async (req, res, next) => {
-  // Read JWT from the 'jwt' cookie
-  console.log("Request Cookie ", req.cookies);
-  const token = req.cookies.jwt;
-  //   console.log("Refresh Token ", token);
+  // Read JWT from the 'refreshToken' cookie
+  const token = req.cookies.refreshToken;
   if (!token) {
     res.status(401);
     throw new Error("Not authorized as an admin");
@@ -48,17 +45,21 @@ exports.refreshToken = asyncHandler(async (req, res, next) => {
     }
 
     const userId = user.userId;
-    console.log("User Id ", userId);
     const accessToken = jwt.sign(
       {
         userId,
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "5m",
+        expiresIn: "1m",
       }
     );
-    console.log("New Access Token ", accessToken);
     res.json(accessToken);
   });
+});
+
+exports.logout = asyncHandler(async (req, res, next) => {
+  // Clearing the cookie
+  res.clearCookie("refreshToken", { httpOnly: true });
+  res.status(200).json({ message: "Logged out successfully" });
 });
