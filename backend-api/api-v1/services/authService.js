@@ -27,7 +27,7 @@ exports.generateTokens = (userId) => {
       userId,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "10m" }
+    { expiresIn: "2m" }
   );
   return { accessToken, refreshToken };
 };
