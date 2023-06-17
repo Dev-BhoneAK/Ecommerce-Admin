@@ -6,7 +6,7 @@ const Login = () => {
     <div className="authentication-box">
       <div className="container">
         <div className="row" style={{ justifyContent: "center" }}>
-          <div className="col-md-6 text-center">
+          <div className="col-md-6">
             <div className="card tab2-card card-login">
               <div className="card-body">
                 <ul
