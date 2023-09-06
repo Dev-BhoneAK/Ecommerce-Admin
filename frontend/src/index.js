@@ -1,19 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './css/themify-icons.css';
-import './scss/style.scss';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import "./css/themify-icons.css";
+import "./scss/style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './css/custom-style.css';
-import {BrowserRouter} from "react-router-dom";
+import "./css/custom-style.css";
+
+import App from "./App";
 import ScrollToTop from "./components/common/ScrollToTop";
-import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient();
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-        <ScrollToTop />
-        <App />
+      <ScrollToTop />
+      <App />
+      <ReactQueryDevtools />
     </BrowserRouter>
+  </QueryClientProvider>
 );
-
