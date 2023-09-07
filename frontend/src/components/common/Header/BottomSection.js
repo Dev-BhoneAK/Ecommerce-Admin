@@ -1,10 +1,7 @@
-import React, { useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import NavBar from "./NavBar";
 
-const Bottom = () => {
-  const [state, setState] = useState("");
-
+const BottomSection = () => {
   return (
     <div className="bottom-part">
       <div className="container">
@@ -16,4 +13,4 @@ const Bottom = () => {
     </div>
   );
 };
-export default Bottom;
+export default BottomSection;
