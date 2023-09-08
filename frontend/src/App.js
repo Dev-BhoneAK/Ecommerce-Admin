@@ -3,6 +3,7 @@ import Home from "./screens/Home";
 import ProductDetail from "./screens/ProductDetail";
 import Header from "components/common/Header";
 import Footer from "./components/common/Footer/Footer";
+import PageNotFound from "screens/PageNotFound";
 import LoadingSkeleton from "./components/product-detail/LoadingSkeleton";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" exact index element={<Home />} />
         <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="*" element={<PageNotFound />} />
         {/*<Route path="/product/:id" element={<LoadingSkeleton />} />*/}
       </Routes>
       <Footer />
