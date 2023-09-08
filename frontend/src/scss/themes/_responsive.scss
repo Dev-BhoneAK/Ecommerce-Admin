@@ -1417,35 +1417,6 @@
   }
 
   header {
-    &.header-6 {
-      .mobile-search {
-        display: inline-block;
-      }
-    }
-
-    &.header-7 {
-      .main-nav-center {
-        .toggle-nav {
-          top: -94px;
-        }
-      }
-
-      .pixelstrap {
-        &.sm-horizontal {
-          > li {
-            > a {
-              color: black;
-
-              &:hover,
-              &:active {
-                color: var(--theme-color);
-              }
-            }
-          }
-        }
-      }
-    }
-
     &.header-tools {
       .toggle-nav {
         padding-top: 25px;
@@ -7693,10 +7664,10 @@
           .header-dropdown {
             .mobile-wishlist,
             .mobile-account {
-              img {
-                filter: invert(1);
-                opacity: 0.8;
-              }
+              //   img {
+              //     filter: invert(1);
+              //     opacity: 0.8;
+              //   }
             }
           }
         }
@@ -11573,11 +11544,11 @@
         margin-top: 0;
 
         li {
-          padding-right: 5px;
+          padding-right: 15px;
 
           a {
             i {
-              font-size: 14px;
+              font-size: 18px;
             }
           }
         }

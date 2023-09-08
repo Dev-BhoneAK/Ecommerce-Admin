@@ -194,6 +194,28 @@
   }
 }
 
+// error section //
+.error-section {
+  padding: 130px 0 140px;
+  text-align: center;
+
+  h1 {
+    font-size: 200px;
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.8;
+    color: $font-grey;
+    margin-top: -11px;
+  }
+
+  h2 {
+    color: $font-grey;
+    font-weight: 500;
+    letter-spacing: 3px;
+    margin: 40px 0;
+  }
+}
+
 // search //
 .search-block {
   padding: 0;
@@ -1070,7 +1092,7 @@
           transition: all 0.3s ease;
 
           i {
-            font-size: 18px;
+            font-size: 22px;
           }
 
           &:hover {

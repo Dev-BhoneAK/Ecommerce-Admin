@@ -1482,7 +1482,9 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         .mobile-cart,
         .mobile-setting {
           i {
-            display: none;
+            display: block;
+            color: $white;
+            font-size: 22px;
           }
 
           .close-circle {
@@ -1536,11 +1538,11 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       .header-dropdown {
         .mobile-wishlist,
         .mobile-account {
-          img {
-            filter: none;
-            width: 20px;
-            opacity: 0.6;
-          }
+          // img {
+          //   filter: none;
+          //   width: 20px;
+          //   opacity: 0.6;
+          // }
         }
       }
     }
@@ -1567,12 +1569,12 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
 
         i {
           font-size: 22px;
-          font-family: $font-themify;
+          // font-family: $font-themify;
           color: $header-font;
 
-          &:before {
-            content: "\e602";
-          }
+          // &:before {
+          //   content: "\e602";
+          // }
         }
 
         .onhover-show-div {
@@ -1592,12 +1594,13 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         right: 64%;
 
         i {
-          font-family: $font-themify;
+          // font-family: $font-themify;
+          font-size: 22px;
           color: $header-font !important;
 
-          &:before {
-            content: "\e634";
-          }
+          // &:before {
+          //   content: "\e634";
+          // }
         }
       }
     }
@@ -1689,10 +1692,6 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             display: inline-block;
             font-size: 22px;
             color: $header-font;
-          }
-
-          img {
-            display: none;
           }
 
           .show-div {

@@ -323,135 +323,6 @@ header {
     }
   }
 
-  &.header-6 {
-    .top-header {
-      background-color: var(--theme-color);
-
-      .header-contact {
-        li {
-          color: $white;
-
-          i {
-            color: $white;
-          }
-        }
-      }
-
-      .header-dropdown {
-        li {
-          color: $white;
-
-          a {
-            color: $white;
-
-            i {
-              color: $white;
-            }
-          }
-        }
-      }
-    }
-
-    .mobile-search {
-      display: none;
-    }
-  }
-
-  &.header-7 {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    background-color: transparent;
-
-    .main-menu {
-      .menu-left {
-        .navbar {
-          padding: 25px 45px 25px 0;
-
-          i {
-            color: $white;
-          }
-        }
-      }
-
-      .brand-logo {
-        padding-top: 25px;
-        padding-bottom: 25px;
-      }
-    }
-
-    .onhover-div {
-      padding-top: 25px;
-      padding-bottom: 25px;
-
-      img {
-        filter: brightness(100);
-      }
-
-      .show-div {
-        img {
-          filter: unset;
-        }
-      }
-
-      &:hover {
-        .show-div {
-          transform: translateY(-23px);
-        }
-      }
-    }
-
-    .game-layout {
-      background-color: rgba($black, 0.5);
-    }
-
-    .pixelstrap {
-      &.sm-horizontal {
-        > li {
-          > a {
-            color: $white;
-
-            &:hover,
-            &:active {
-              color: $white;
-            }
-          }
-        }
-      }
-    }
-
-    .top-header {
-      background-color: transparent;
-
-      &.top-header-dark {
-        .header-contact {
-          li {
-            color: $white;
-
-            i {
-              color: $white;
-            }
-          }
-        }
-
-        .header-dropdown {
-          > li {
-            color: $white;
-
-            > a {
-              color: $white;
-
-              i {
-                color: $white;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
   &.header-tools {
     position: absolute;
     width: 100%;
@@ -651,12 +522,12 @@ header {
       .header-dropdown {
         .mobile-wishlist,
         .mobile-account {
-          img {
-            display: block;
-          }
+          //   img {
+          //     display: block;
+          //   }
 
           i {
-            display: none;
+            display: block;
           }
         }
       }
@@ -1482,8 +1353,9 @@ header {
 
       a {
         i {
-          color: $header-font;
+          color: $white;
           transition: all 0.5s ease;
+          font-size: 22px;
         }
 
         &:hover {
