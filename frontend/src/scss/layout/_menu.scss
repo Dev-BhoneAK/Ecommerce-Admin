@@ -125,6 +125,9 @@
     &.disabled {
       cursor: default;
     }
+    &.active {
+      color: var(--theme-color);
+    }
   }
 
   * {
