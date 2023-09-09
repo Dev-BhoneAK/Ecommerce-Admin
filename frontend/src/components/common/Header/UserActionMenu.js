@@ -22,12 +22,12 @@ const UserActionMenu = () => {
         <ul class="header-dropdown">
           <li class="mobile-wishlist">
             <Link to="/wish-list">
-              <i class="fa-solid fa-heart"></i>
+              <i class="fa-solid fa-heart" />
             </Link>
           </li>
           <li class="mobile-account">
             <Link to="/consumer-profile">
-              <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-user" />
             </Link>
           </li>
         </ul>
@@ -39,32 +39,17 @@ const UserActionMenu = () => {
           <ul>
             <li class="onhover-div d-xl-none d-inline-block mobile-search">
               <div>
-                {/* <img
-                  src="/assets/icons/user.png"
-                  class="img-fluid blur-up lazyload"
-                  alt=""
-                />{" "} */}
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass" />
               </div>
             </li>
             <li class="onhover-div mobile-setting">
               <div>
-                {/* <img
-                  src="/assets/icons/setting.png"
-                  class="img-fluid blur-up lazyload"
-                  alt=""
-                />{" "} */}
-                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-gear" />
               </div>
             </li>
             <li class="onhover-div mobile-cart">
               <div>
-                {/* <img
-                  src="/assets/icons/cart.png"
-                  class="img-fluid blur-up lazyload"
-                  alt=""
-                />{" "} */}
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-cart-shopping" />
               </div>
               <span class="cart_qty_cls">2</span>
             </li>
