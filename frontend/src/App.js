@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./screens/Home";
-import ProductDetail from "./screens/ProductDetail";
+import Home from "./components/home/Home";
+import ProductDetail from "./components/ProductDetail";
 import Header from "components/common/Header";
 import Footer from "./components/common/Footer/Footer";
 import PageNotFound from "screens/PageNotFound";
-import LoadingSkeleton from "./components/product-detail/LoadingSkeleton";
+import LoadingSkeleton from "./components/ProductDetail/LoadingSkeleton";
 
 function App() {
   return (
