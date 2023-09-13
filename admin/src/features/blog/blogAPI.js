@@ -1,15 +1,15 @@
 import { API_URL } from "../../config/API";
-import axios from "axios";
+import jwtInterceoptor from "../../utility/jwtInterceptor";
 
 const API = API_URL + "blogs";
 
 export const getAllBlogsAPI = async () => {
-  return await axios.get(API);
+  return await jwtInterceoptor.get(API);
 };
 
 export const saveBlogAPI = async (blog) => {
   try {
-    const responseData = await axios.post(API, blog, {
+    const responseData = await jwtInterceoptor.post(API, blog, {
       headers: {
         "content-type": "multipart/form-data",
       },
@@ -21,7 +21,7 @@ export const saveBlogAPI = async (blog) => {
 };
 
 export const updateBlogAPI = async (blogId, blog) => {
-  const responseData = await axios.patch(API + `/${blogId}`, blog, {
+  const responseData = await jwtInterceoptor.patch(API + `/${blogId}`, blog, {
     headers: {
       "content-type": "multipart/form-data",
     },
@@ -30,6 +30,6 @@ export const updateBlogAPI = async (blogId, blog) => {
 };
 
 export const deleteBlogAPI = async (blogId) => {
-  const responseData = await axios.delete(API + `/${blogId}`);
+  const responseData = await jwtInterceoptor.delete(API + `/${blogId}`);
   return responseData;
 };
