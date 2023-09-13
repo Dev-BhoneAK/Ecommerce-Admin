@@ -7,7 +7,7 @@ exports.getAllBlogs = async () => {
   const blogs = await blogDAL.findAllBlogs();
   const responseData = blogs.map((blog) => ({
     ...blog._doc,
-    images: process.env.DOMAIN_URI + blog.images,
+    image: process.env.DOMAIN_URI + blog.image,
   }));
   return responseData;
 };
@@ -35,4 +35,3 @@ exports.getLatestBlogs = async () => {
   return blogs;
 };
 /* Consumer Endpoint End */
-
