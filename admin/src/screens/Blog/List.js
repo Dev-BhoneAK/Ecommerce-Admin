@@ -46,17 +46,17 @@ const BlogList = () => {
       sort: true,
     },
     {
-      dataField: "images",
+      dataField: "image",
       text: "Blog Image",
       formatter: (cellContent, row) => (
-        <img width="75" height="75" src={row.images} alt="blog image" />
+        <img width="75" height="75" src={row.image} alt="blog" />
       ),
     },
     {
-      dataField: "date",
-      text: "Posted Date",
+      dataField: "publishedDate",
+      text: "Published Date",
       formatter: (cellContent, row) => {
-        const localDate = new Date(row.date);
+        const localDate = new Date(row.publishedDate);
         const localDateString = localDate.toLocaleDateString(undefined, {
           day: "numeric",
           month: "short",
