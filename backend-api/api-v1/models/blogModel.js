@@ -6,7 +6,11 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    images: {
+    image: {
+      type: String,
+      required: true,
+    },
+    tags: {
       type: Array,
       required: true,
     },
@@ -14,7 +18,7 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    date: {
+    publishedDate: {
       type: Date,
       required: true,
     },
