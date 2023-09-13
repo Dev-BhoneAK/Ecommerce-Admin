@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { brandsData } = require("./data/brandsData");
+const { blogsData } = require("./data/blogsData");
 const { categoriesData } = require("./data/categoriesData");
 const { productsData } = require("./data/productsData");
 const { reviewsData } = require("./data/reviewsData");
@@ -7,6 +8,7 @@ const { ordersData } = require("./data/ordersData");
 const { usersData } = require("./data/usersData");
 const User = require("../models/userModel");
 const Brand = require("../models/brandModel");
+const Blog = require("../models/blogModel");
 const Category = require("../models/categoryModel");
 const Product = require("../models/productModel");
 const Review = require("../models/reviewModel");
@@ -20,6 +22,7 @@ database.connect();
 const importData = async () => {
   try {
     await Brand.deleteMany();
+    await Blog.deleteMany();
     await Category.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
@@ -27,6 +30,7 @@ const importData = async () => {
     await Order.deleteMany();
 
     const createdBrands = await Brand.insertMany(brandsData);
+    const createdBlogs = await Blog.insertMany(blogsData);
     const createdUsers = await User.insertMany(usersData);
     await Category.insertMany(categoriesData);
 
