@@ -11,7 +11,6 @@ const {
 const database = require("./api-v1/config/database");
 
 const adminRouter = require("./api-v1/routes/admin");
-const consumerRouter = require("./api-v1/routes/consumer");
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 database.connect();
 
 app.use("/api/v1/admin", adminRouter);
-app.use("/api/v1/consumer", consumerRouter);
 
 app.use(notFound);
 app.use(errorHandler);
