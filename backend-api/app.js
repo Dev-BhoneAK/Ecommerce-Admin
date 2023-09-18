@@ -4,13 +4,16 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const logger = require("morgan");
+
 const {
   notFound,
   errorHandler,
 } = require("./api-v1/middleware/errorHandlerMiddleware");
 const database = require("./api-v1/config/database");
-
 const adminRouter = require("./api-v1/routes/admin");
+
+// connect to database
+database.connect();
 
 const app = express();
 
@@ -20,7 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, "public")));
-database.connect();
 
 app.use("/api/v1/admin", adminRouter);
 
