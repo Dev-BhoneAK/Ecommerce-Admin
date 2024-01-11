@@ -33,7 +33,7 @@ exports.createBlog = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Cannot Create New Blog. Please check Input Fields");
   }
-  res.status(200).json(newBlog);
+  res.status(201).json(newBlog);
 });
 
 exports.updateBlog = asyncHandler(async (req, res) => {
