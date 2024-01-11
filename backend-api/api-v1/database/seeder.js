@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { brandsData } = require("./data/brandsData");
+const { bannersData } = require("./data/bannersData");
 const { blogsData } = require("./data/blogsData");
 const { categoriesData } = require("./data/categoriesData");
 const { productsData } = require("./data/productsData");
@@ -8,6 +9,7 @@ const { ordersData } = require("./data/ordersData");
 const { usersData } = require("./data/usersData");
 const User = require("../models/userModel");
 const Brand = require("../models/brandModel");
+const Banner = require("../models/bannerModel");
 const Blog = require("../models/blogModel");
 const Category = require("../models/categoryModel");
 const Product = require("../models/productModel");
@@ -22,6 +24,7 @@ database.connect();
 const importData = async () => {
   try {
     await Brand.deleteMany();
+    await Banner.deleteMany();
     await Blog.deleteMany();
     await Category.deleteMany();
     await Product.deleteMany();
@@ -30,6 +33,7 @@ const importData = async () => {
     await Order.deleteMany();
 
     const createdBrands = await Brand.insertMany(brandsData);
+    const createdBanners = await Banner.insertMany(bannersData);
     const createdBlogs = await Blog.insertMany(blogsData);
     const createdUsers = await User.insertMany(usersData);
     await Category.insertMany(categoriesData);
@@ -84,6 +88,8 @@ const destroyData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
     await Brand.deleteMany();
+    await Banner.deleteMany();
+    await Blog.deleteMany();
 
     console.log("Data Destroyed!");
     process.exit();
