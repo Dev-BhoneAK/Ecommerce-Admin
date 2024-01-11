@@ -31,7 +31,7 @@ exports.createBrand = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Cannot Create New Brand. Please check Input Fields");
   }
-  res.status(200).json(newBrand);
+  res.status(201).json(newBrand);
 });
 
 exports.updateBrand = asyncHandler(async (req, res) => {
