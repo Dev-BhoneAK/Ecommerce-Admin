@@ -34,7 +34,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Cannot Create New Product. Please check Input Fields");
   }
-  res.status(200).json(newProduct);
+  res.status(201).json(newProduct);
 });
 
 exports.updateProduct = asyncHandler(async (req, res) => {
