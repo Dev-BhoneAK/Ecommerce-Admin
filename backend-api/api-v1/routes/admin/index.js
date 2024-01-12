@@ -13,7 +13,7 @@ router.use("/brands", adminAuth, brands);
 router.use("/blogs", adminAuth, blogs);
 router.use("/categories", adminAuth, categories);
 router.use("/products", adminAuth, products);
-router.use("/orders", adminAuth, orders);
+router.use("/orders", orders);
 router.use("/reviews", adminAuth, reviews);
 router.use("/auth", auth);
 
