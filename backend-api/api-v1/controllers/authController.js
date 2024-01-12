@@ -24,7 +24,7 @@ exports.login = asyncHandler(async (req, res) => {
     httpOnly: true,
     sameSite: "Strict",
     secure: process.env.NODE_ENV === "production",
-    maxAge: 10 * 60 * 1000, // 10 minutes
+    maxAge: 100 * 60 * 1000, // 100 minutes
   });
   res.json(accessToken);
 });
