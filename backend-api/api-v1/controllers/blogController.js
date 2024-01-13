@@ -5,12 +5,16 @@ const blogService = require("../services/blogService");
 const asyncHandler = require("express-async-handler");
 
 exports.getAllBlogs = async (req, res) => {
-  const blogs = await blogService.getAllBlogs();
-  if (!blogs) {
-    res.status(404);
-    throw new Error("Blogs Not Found");
+  try {
+    const blogs = await blogService.getAllBlogs();
+    if (!blogs) {
+      res.status(404);
+      throw new Error("Blogs Not Found");
+    }
+    res.status(200).json(blogs);
+  } catch (error) {
+    res.status(400).json({ message: "Orders Not Found" });
   }
-  res.status(200).json(blogs);
 };
 
 exports.getBlog = asyncHandler(async (req, res) => {
