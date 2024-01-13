@@ -5,12 +5,16 @@ const brandService = require("../services/brandService");
 const asyncHandler = require("express-async-handler");
 
 exports.getAllBrands = async (req, res) => {
-  const brands = await brandService.getAllBrands();
-  if (!brands) {
-    res.status(404);
-    throw new Error("Brands Not Found");
+  try {
+    const brands = await brandService.getAllBrands();
+    if (!brands) {
+      res.status(404);
+      throw new Error("Brands Not Found");
+    }
+    res.status(200).json(brands);
+  } catch (error) {
+    res.status(400).json({ message: "Orders Not Found" });
   }
-  res.status(200).json(brands);
 };
 
 exports.getBrand = asyncHandler(async (req, res) => {
