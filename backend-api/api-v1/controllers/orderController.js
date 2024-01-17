@@ -3,27 +3,16 @@
  */
 const orderService = require("../services/orderService");
 const asyncHandler = require("express-async-handler");
+const { throwCustomError } = require("../utility/helpers");
 
-exports.getAllOrders = async (req, res) => {
-  try {
-    const orders = await orderService.getAllOrders();
-    // const orders = "";
-    console.log("orders ", !!orders.length);
-    if (!orders || !orders.length) {
-      return res.status(400).json({ message: "Orders Not Found" });
-    }
-    res.status(200).json(orders);
-  } catch (error) {
-    res.status(400).json({ message: "Orders Not Found" });
+exports.getAllOrders = asyncHandler(async (req, res) => {
+  const orders = await orderService.getAllOrders();
+  if (Array.isArray(orders) && orders.length > 0) {
+    res.status(200).json({ status: "success", data: orders });
+  } else {
+    throwCustomError("Order Not Found", 400);
   }
-  // const orders = await orderService.getAllOrders();
-  // const orders = "";
-  // console.log("orders ", !!orders.length);
-  // if (!orders || !orders.length) {
-  //   res.status(400).json({ message: "Orders Not Found" });
-  // }
-  // res.status(200).json(orders);
-};
+});
 
 exports.getOrder = asyncHandler(async (req, res) => {
   const orderId = req.params.orderId;
