@@ -109,10 +109,6 @@ const OrderList = () => {
                 </span>
               </div>
             </form>
-
-            <Link to="add" className="btn btn-primary mt-md-0 mt-2">
-              Create Order
-            </Link>
           </div>
           <DataTable data={orderItems} columns={columns} />
         </div>
