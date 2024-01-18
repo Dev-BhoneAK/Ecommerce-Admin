@@ -10,7 +10,7 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
   if (Array.isArray(orders) && orders.length > 0) {
     res.status(200).json({ status: "success", data: orders });
   } else {
-    throwCustomError("Order Not Found", 400);
+    throwCustomError("Orders Not Found", 200);
   }
 });
 
@@ -18,10 +18,9 @@ exports.getOrder = asyncHandler(async (req, res) => {
   const orderId = req.params.orderId;
   const order = await orderService.getOrder(orderId);
   if (!order) {
-    res.status(404);
-    throw new Error("Order Not Found");
+    throwCustomError("Order Not Found", 200);
   }
-  res.status(200).json(order);
+  res.status(200).json({ status: "success", data: order });
 });
 
 exports.updateOrder = asyncHandler(async (req, res) => {
@@ -30,8 +29,7 @@ exports.updateOrder = asyncHandler(async (req, res) => {
   order.logo = req.file.path;
   const updatedOrder = await orderService.updateOrder(orderId, order);
   if (!updatedOrder) {
-    res.status(400);
-    throw new Error("Cannot Update Order. Please check Input Fields");
+    throwCustomError("Cannot Update Order. Please check Input Fields", 400);
   }
-  res.status(200).json(updatedOrder);
+  res.status(200).json({ status: "success", data: updatedOrder });
 });
