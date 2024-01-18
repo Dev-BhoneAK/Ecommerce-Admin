@@ -8,16 +8,12 @@ export const getAllOrdersAPI = async () => {
 };
 
 export const saveOrderAPI = async (order) => {
-  // try{
   const responseData = await axios.post(API, order, {
     headers: {
       "content-type": "multipart/form-data",
     },
   });
   return responseData;
-  // }catch (e) {
-  //     console.log('error ', e);
-  // }
 };
 
 export const updateOrderAPI = async (orderId, order) => {
