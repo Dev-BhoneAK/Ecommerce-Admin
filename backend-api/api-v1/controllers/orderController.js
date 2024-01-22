@@ -7,11 +7,14 @@ const { throwCustomError } = require("../utility/helpers");
 
 exports.getAllOrders = asyncHandler(async (req, res) => {
   const orders = await orderService.getAllOrders();
-  if (Array.isArray(orders) && orders.length > 0) {
-    res.status(200).json({ status: "success", data: orders });
-  } else {
+  if (!Array.isArray(orders) || orders.length === 0) {
     throwCustomError("Orders Not Found", 200);
   }
+  // if (Array.isArray(orders) && orders.length > 0) {
+  // } else {
+  //   throwCustomError("Orders Not Found", 200);
+  // }
+  res.status(200).json({ status: "success", data: orders });
 });
 
 exports.getOrder = asyncHandler(async (req, res) => {
