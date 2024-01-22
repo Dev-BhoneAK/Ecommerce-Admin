@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Breadcrumb from "../../components/common/Breadcrumb";
-import ConfirmDeleteAlert from "../../components/common/ConfirmDeleteAlert";
-import { fetchBlogs, deleteBlog } from "../../features/blog/blogSlice";
-import DataTable from "../../components/common/DataTable";
+import Breadcrumb from "components/common/Breadcrumb";
+import ConfirmDeleteAlert from "components/common/ConfirmDeleteAlert";
+import { fetchBlogs, deleteBlog } from "features/blog/blogSlice";
+import DataTable from "components/common/DataTable";
 
 const BlogList = () => {
   const dispatch = useDispatch();
