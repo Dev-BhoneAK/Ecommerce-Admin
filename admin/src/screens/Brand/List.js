@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Breadcrumb from "../../components/common/Breadcrumb";
-import ConfirmDeleteAlert from "../../components/common/ConfirmDeleteAlert";
-import { fetchBrands, deleteBrand } from "../../features/brand/brandSlice";
-import CreateEditModal from "../../features/brand/CreateEditModal";
-import { CreateEditContext } from "../../components/common/CreateEditContext";
-import DataTable from "../../components/common/DataTable";
+import Breadcrumb from "components/common/Breadcrumb";
+import ConfirmDeleteAlert from "components/common/ConfirmDeleteAlert";
+import { fetchBrands, deleteBrand } from "features/brand/brandSlice";
+import CreateEditModal from "features/brand/CreateEditModal";
+import { CreateEditContext } from "components/common/CreateEditContext";
+import DataTable from "components/common/DataTable";
 
 const BrandList = () => {
   const dispatch = useDispatch();
